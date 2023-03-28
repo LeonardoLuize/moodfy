@@ -6,6 +6,9 @@
 
 :root{
     --white: #FFFFFF;
+    --text: #dedbad;
+    --background: #24b0a2;
+    --accent: #24b0a2;
 }
 
 @media (max-width: 1080px) {
@@ -20,8 +23,9 @@
     }
 }
 
-body{
-    background: var(--gray-900);
+.container{
+    height: 100vh;
+    background: var(--background);
     color: var(--white);
 }
 

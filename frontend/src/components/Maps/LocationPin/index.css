@@ -1,0 +1,15 @@
+.location-container {
+    display: flex;
+    align-items: center;
+    width: 180px;
+    color: var(--main-blue);
+}
+
+.location-icon {
+  size: 20px;
+  font-size: 20px;
+}
+
+.location-text {
+    font-size: 18px;
+}

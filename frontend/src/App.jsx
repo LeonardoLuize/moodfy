@@ -1,10 +1,18 @@
-import { Maps } from './components/Maps'
+import { Box } from "@chakra-ui/react";
+import { MapContainer } from "./components/Maps";
+import "./style/global.css";
 
-function App() {
-
+export default function App() {
   return (
-    <Maps />
-  )
+    <Box className="container">
+      <MapContainer
+        location={{
+          address: "Havana Bar",
+          lat: -25.450904580556525,
+          lng: -49.253065715519305, 
+        }}
+        zoomLevel={17}
+      />
+    </Box>
+  );
 }
-
-export default App
