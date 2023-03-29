@@ -1,24 +1,20 @@
-import React from 'react'
-import GoogleMapReact from 'google-map-react'
-import './map.css'
-import { LocationPin } from './LocationPin';
+import React from "react";
+import "./map.css";
+import { LocationPin } from "./LocationPin";
+import { MapContainer, TileLayer } from "react-leaflet";
 
-export function MapContainer({location, zoomLevel}) {
+export function MapDisplay() {
+  const position = [-25.4528, -49.2508];
+
   return (
-    <div className="map-container">
-    <div className="map">
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo" }}
-        defaultCenter={location}
-        defaultZoom={zoomLevel}
-      >
-        <LocationPin
-          lat={location.lat}
-          lng={location.lng}
-          text={location.address}
+    <div id="map">
+      <MapContainer center={position} zoom={13}>
+        <TileLayer
+          attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+          url="http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
         />
-      </GoogleMapReact>
+        <LocationPin position={position}/>
+      </MapContainer>
     </div>
-  </div>
   );
 }
