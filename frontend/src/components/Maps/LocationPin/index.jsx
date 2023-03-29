@@ -8,7 +8,7 @@ export function LocationPin({ position }) {
     <Marker
       icon={
         new Icon({
-          iconUrl: "./public/Location.svg",
+          iconUrl: "./Location.svg",
           iconSize: [38, 95],
           iconAnchor: [22, 94],
           popupAnchor: [-3, -76],
