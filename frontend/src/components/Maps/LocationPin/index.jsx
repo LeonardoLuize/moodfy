@@ -1,6 +1,7 @@
 import { Icon } from "leaflet";
 import { HiLocationMarker } from "react-icons/hi";
-import { Marker, Popup } from "react-leaflet";
+import { Marker } from "react-leaflet";
+import { Popup } from "../PopUp";
 import "./index.css";
 
 export function LocationPin({ position }) {
@@ -18,9 +19,7 @@ export function LocationPin({ position }) {
       }
       position={position}
     >
-      <Popup>
-        A pretty CSS3 popup. <br /> Easily customizable.
-      </Popup>
+      <Popup />
     </Marker>
   );
 }
