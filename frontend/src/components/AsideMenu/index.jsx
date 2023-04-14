@@ -8,40 +8,20 @@ import {
   DrawerOverlay,
   Icon,
   Img,
+  useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import theme from "../../theme";
 import { RiHomeFill } from "react-icons/ri";
 import LogoIcon from "../../assets/logo.svg"
+import { LateralBar } from "./LateralBar";
 
 export function AsideMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
-      <Box
-        width="100px"
-        height="100%"
-        display="flex"
-        flexDir="column"
-        justifyContent="space-between"
-        alignItems="center"
-        p={8}
-        bg={theme.colors.menuBackground["500"]}
-      >
-        <Box>
-          <Icon
-            as={RiHomeFill}
-            _hover={{color: theme.colors.brand["700"]}}
-            transition={"all .2s"}
-            cursor="pointer"
-            color={theme.colors.brand["500"]}
-            w={7}
-            h={7}
-          />
-        </Box>
-        <Img src={LogoIcon} w={7} h={7} />
-      </Box>
+      <LateralBar onOpen={onOpen} />
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
