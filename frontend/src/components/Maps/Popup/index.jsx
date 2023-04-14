@@ -2,6 +2,7 @@ import { Avatar, Box, Button, CardBody, Text } from "@chakra-ui/react";
 import { Popup as LeafletPopup } from "react-leaflet";
 import { HiOutlineExternalLink } from "react-icons/hi";
 import "./index.css";
+import theme from "../../../theme";
 
 export function Popup() {
   return (
@@ -34,7 +35,7 @@ export function Popup() {
             </Text>
             <Text fontFamily="body" m={0}>41 99999-9999</Text>
           </Box>
-          <Button colorScheme={"purple"} p={2} size="md">
+          <Button colorScheme={"brand"} p={2} size="md">
             <HiOutlineExternalLink size={20} />
           </Button>
         </Box>

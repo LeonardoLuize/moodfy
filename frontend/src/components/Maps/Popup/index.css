@@ -2,6 +2,7 @@
 .leaflet-popup-content-wrapper{
     background-color: transparent !important;
     color: none;
+    box-shadow: none !important;
 }
 
 .leaflet-popup-content-wrapper p {
