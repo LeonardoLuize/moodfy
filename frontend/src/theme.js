@@ -17,7 +17,7 @@ const theme = extendTheme({
       900: "#125536",
     },
     menuBackground: {
-      500: "#0E0A0F",
+      500: "#FAFAFA",
     },
     text: {
       500: "#0E0A0F"

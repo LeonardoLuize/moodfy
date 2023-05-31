@@ -13,14 +13,13 @@ import {
   MenuList,
   MenuItem,
 } from "@chakra-ui/react";
-import { FiSearch } from "react-icons/fi";
-import { BsPlusCircleDotted, BsPlusCircleFill, BsPlusLg } from "react-icons/bs";
+import { MagnifyingGlass, PlusCircle } from "@phosphor-icons/react";
 import theme from "../../theme";
 
 function SearchButton() {
   return (
     <Button borderRadius="10px" colorScheme={"brand"} size="md">
-      <Icon as={FiSearch} w={5} h={5} />
+      <Icon as={MagnifyingGlass} w={5} h={5} />
     </Button>
   );
 }
@@ -64,7 +63,12 @@ export function Searchinput() {
           <TagCloseButton />
         </Tag>
         <Menu>
-          <MenuButton borderRadius="full" as={Button} colorScheme="brand" leftIcon={<Icon as={BsPlusLg} w={5} h={5} />}>
+          <MenuButton
+            borderRadius="full"
+            as={Button}
+            colorScheme="brand"
+            leftIcon={<Icon as={PlusCircle} w={5} h={5} />}
+          >
             Adicionar Filtro
           </MenuButton>
           <MenuList p={2}>

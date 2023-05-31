@@ -1,5 +1,4 @@
 import { Icon } from "leaflet";
-import { HiLocationMarker } from "react-icons/hi";
 import { Marker } from "react-leaflet";
 import { Popup } from "../PopUp";
 import "./index.css";

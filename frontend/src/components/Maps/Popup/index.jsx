@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, CardBody, Text } from "@chakra-ui/react";
 import { Popup as LeafletPopup } from "react-leaflet";
-import { HiOutlineExternalLink } from "react-icons/hi";
+import { ArrowSquareOut } from "@phosphor-icons/react";
 import "./index.css";
 import theme from "../../../theme";
 
@@ -36,7 +36,7 @@ export function Popup() {
             <Text fontFamily="body" m={0}>41 99999-9999</Text>
           </Box>
           <Button colorScheme={"brand"} p={2} size="md">
-            <HiOutlineExternalLink size={20} />
+            <ArrowSquareOut size={20} />
           </Button>
         </Box>
         <Text fontFamily="body" fontSize={14} pt={8}>
