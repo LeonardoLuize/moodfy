@@ -1,10 +1,10 @@
 <?php
-
-$servername = "Moodfy"
-$username = "root"
-$password = "root" # Hide the password
 function getConnection() {
-    return new sqli($servername, $username, $password)
+    $servername = "Moodfy";
+    $username = "root";
+    $password = "123"; # Hide the password
+
+    return new mysqli($servername, $username, $password);
 }
 
 ?>

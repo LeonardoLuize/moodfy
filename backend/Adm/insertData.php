@@ -1,5 +1,14 @@
 <?php
-function insertPlace($name, $desc, $lat, $long, $photo)
+
+$name = $_POST['name'];
+$lat = $_POST['lat'];
+$long = $_POST['long'];
+$desc = $_POST['desc'];
+$photo = $_POST['photo'];
+
+insertData($name, $desc, $lat, $long, $photo);
+
+function insertData($name, $desc, $lat, $long, $photo)
 {
     include 'getConnection.php';
     $conn = getConnection();
