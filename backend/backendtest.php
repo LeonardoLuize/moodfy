@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form class="inputs" method="POST" action="Connection/insertData.php">
+    <form class="inputs" method="POST" action="Adm/insertData.php">
         Name <input type="text" name="name"/><br>
         Latitude <input type="text" name="lat"/><br>
         Longitude <input type="text" name="long"/><br>
@@ -17,4 +17,3 @@
 </form>
 </body>
 </html>
-<!-- $name . $lat . $long . $desc . $photo; -->

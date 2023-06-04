@@ -6,27 +6,34 @@ $long = $_POST['long'];
 $desc = $_POST['desc'];
 $photo = $_POST['photo'];
 
-insertData($name, $desc, $lat, $long, $photo);
+session_start();
+$_SESSION['idInserted'] = insertData($name, $desc, $lat, $long, $photo);
 
 function insertData($name, $desc, $lat, $long, $photo)
 {
-    include 'getConnection.php';
+    include '../Connection/getConnection.php';
     $conn = getConnection();
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
     
     $query = "INSERT INTO Places (Name, Latitude, Longitude, Description, Photo) VALUES
-        ($name, $lat, $long, $desc, $photo)";
+        ('$name', '$lat', '$long', '$desc', '$photo')";
     
     $result = $conn->query($query);
 
+    $lastId = $conn->insert_id;
+
     if ($result === TRUE) {
-        echo "Inserted<br>" . $query . "<br>" . mysql_insert_id() . $name . $lat . $long . $desc . $photo;
+        echo "Inserted<br>" . $query . "<br>" . $lastId . $name . $lat . $long . $desc . $photo;
     } else {
         echo "Error: " . $query . "<br>" . $conn->error;
     }
     
     $conn->close();
+
+    // Change for the page you want to redirect to
+    header("Location: ../backendtestChangeFilters.php");
+    return $lastId;
 }
 ?>
