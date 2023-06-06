@@ -9,20 +9,28 @@ function getLocalFilter($userLat, $userLong)
 
     echo $filters . "<br>";
 
+    $query = "SELECT * FROM Places p INNER JOIN PlaceXFilter pxf ON (pxf.IDPlace = p.ID) " .
+    "INNER JOIN Filters f ON (pxf.IDFilter = f.ID) WHERE f.Filter IN (";
+
     for ($i = 0; $i < sizeof($filters); i++)
     {
-        $query = "SELECT * FROM Places p INNER JOIN PlaceXFilter pxf ON (pxf.IDPlace = p.ID) " .
-        "INNER JOIN Filters f ON (pxf.IDFilter = f.ID) WHERE f.Filter = " . $filters[i] . 
-        "ORDER BY (ABS(p.Latitude) + ABS(p.Longitude))";
+        $query = $query . $filters[i] . ", "
         
-        $result = $conn->query($query);  
     }
+    $query = substr($query, 0, sizeof($query) - 2) . ") ";
+    $query = $query . "ORDER BY (ABS(p.Latitude) + ABS(p.Longitude))";
 
-    
-    $query = substr($query, 0, sizeof($query) - 4);
 
     echo $query;
+    $result = $conn->query($query);  
 
 }
 
+
+// SELECT *, COUNT(p.Name) as counter FROM Places p 
+// 	INNER JOIN PlaceXFilter pxf ON (pxf.IDPlace = p.ID)
+//     INNER JOIN Filters f ON (pxf.IDFilter = f.ID)
+//     WHERE f.Filter IN ('pop', 'rock')
+//     GROUP BY p.Name
+//     ORDER BY counter DESC, (ABS(p.Latitude) + ABS(p.Longitude)) ASC
 ?>
