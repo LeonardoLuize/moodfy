@@ -152,14 +152,48 @@ export function Popup() {
                 </Text>
               </Box>
 
-              <Box w="full" display="flex" alignItems="center" justifyContent="center" flexDir="column" pb={10}>
-                <Text color="gray.500" mb={3}>Nota Moody:</Text>
-                <Box display="flex" alignItems="center" gap={5} >
-                  <Icon color="brand.500" as={Star} weight="fill" fontSize={40} />
-                  <Icon color="brand.500" as={Star} weight="fill" fontSize={40} />
-                  <Icon color="brand.500" as={Star} weight="fill" fontSize={40} />
-                  <Icon color="brand.500" as={Star} weight="fill" fontSize={40} />
-                  <Icon color="brand.500" as={Star} weight="fill" fontSize={40} />
+              <Box
+                w="full"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                flexDir="column"
+                pb={10}
+              >
+                <Text color="gray.500" mb={3}>
+                  Nota Moody:
+                </Text>
+                <Box display="flex" alignItems="center" gap={5}>
+                  <Icon
+                    color="brand.500"
+                    as={Star}
+                    weight={5 > 1 ? "fill" : "regular"}
+                    fontSize={40}
+                  />
+                  <Icon
+                    color="brand.500"
+                    as={Star}
+                    weight={5 > 2 ? "fill" : "regular"}
+                    fontSize={40}
+                  />
+                  <Icon
+                    color="brand.500"
+                    as={Star}
+                    weight={5 > 3 ? "fill" : "regular"}
+                    fontSize={40}
+                  />
+                  <Icon
+                    color="brand.500"
+                    as={Star}
+                    weight={5 > 4 ? "fill" : "regular"}
+                    fontSize={40}
+                  />
+                  <Icon
+                    color="brand.500"
+                    as={Star}
+                    weight={5 == 5 ? "fill" : "regular"}
+                    fontSize={40}
+                  />
                 </Box>
               </Box>
             </AlertDialogBody>
