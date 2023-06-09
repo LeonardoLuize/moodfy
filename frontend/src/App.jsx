@@ -3,6 +3,8 @@ import { MapDisplay } from "./components/Maps";
 import "./style/global.css";
 import { AsideMenu } from "./components/AsideMenu";
 import { MainContent } from "./components/MainContent";
+import { useEffect } from "react";
+import { api } from "./lib/axios";
 
 export default function App() {
   return (
