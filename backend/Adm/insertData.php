@@ -4,23 +4,22 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: X-Requested-With,Authorization,Content-Type');
 header('Access-Control-Max-Age: 86400');
+header('Content-Type: application/json; charset=utf-8');
 
-$name = $_POST['name'];
-$lat = $_POST['lat'];
-$long = $_POST['long'];
-$desc = $_POST['desc'];
-$photo = $_POST['photo'];
+$data = json_decode(file_get_contents('php://input'), true);
+
+$name = $data['name'];
+$lat = $data['lat'];
+$long = $data['long'];
+$desc = $data['desc'];
+$photo = $data['photo'];
 
 session_start();
-$_SESSION['idInserted'] = insertData($name, $desc, $lat, $long, $photo);
 
 function insertData($name, $desc, $lat, $long, $photo)
 {
     include '../Connection/getConnection.php';
     $conn = getConnection();
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
     
     $query = "INSERT INTO Places (Name, Latitude, Longitude, Description, Photo) VALUES
         ('$name', '$lat', '$long', '$desc', '$photo')";
@@ -30,15 +29,28 @@ function insertData($name, $desc, $lat, $long, $photo)
     $lastId = $conn->insert_id;
 
     if ($result === TRUE) {
-        echo "Inserted<br>" . $query . "<br>" . $lastId . $name . $lat . $long . $desc . $photo;
+        $response = array(
+            'status' => 'success',
+            'lastId' => $lastId,
+            'name' => $name,
+            'lat' => $lat,
+            'long' => $long,
+            'desc' => $desc,
+            'photo' => $photo
+        );
     } else {
-        echo "Error: " . $query . "<br>" . $conn->error;
+        $response = array(
+            'status' => 'error',
+            'message' => 'Error inserting data: ' . $conn->error
+        );
     }
-    
+
     $conn->close();
 
-    // Change for the page you want to redirect to
-    header("Location: ../backendtestChangeFilters.php");
-    return $lastId;
+    $_SESSION['idInserted'] = $lastId;
+
+    return json_encode($response);
 }
+
+echo insertData($name, $desc, $lat, $long, $photo);
 ?>
