@@ -10,7 +10,7 @@ export default function App() {
   useEffect(() => {
     console.log("req")
 
-    api.get("/getAllFilters.php").then(data => console.log(data))
+    api.get("/Adm/getAllFilters.php").then(data => console.log(data))
   }, [])
 
   return (
