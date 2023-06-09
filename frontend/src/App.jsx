@@ -7,12 +7,6 @@ import { useEffect } from "react";
 import { api } from "./lib/axios";
 
 export default function App() {
-  useEffect(() => {
-    console.log("req")
-
-    api.get("/Adm/getAllFilters.php").then(data => console.log(data))
-  }, [])
-
   return (
     <Box
       display="flex"
