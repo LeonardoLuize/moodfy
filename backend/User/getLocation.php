@@ -25,11 +25,14 @@ function getLocation()
     $result = filterByCurrentUser($lat, $long);
 
     if ($result->num_rows > 0) {
-        $places = array();
+
+        $places = array();       
         while ($row = $result->fetch_assoc()) {
-            $places[] = $row;
+            $places[] = $row; // Add place in array // TODO: Check if this works
         }
+
         echo json_encode($places);
+
     } else {
         echo "0 results";
     }

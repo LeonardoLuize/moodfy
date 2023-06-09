@@ -5,6 +5,8 @@ header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: X-Requested-With,Authorization,Content-Type');
 header('Access-Control-Max-Age: 86400');
 
+getLocalFilter($_GET['latitude'], $_GET['longitude']);
+
 function getLocalFilter($userLat, $userLong)
 {
     include('../Connection/getConnection.php');
@@ -28,6 +30,25 @@ function getLocalFilter($userLat, $userLong)
     $query = $query . "ORDER BY counter DESC, (ABS(p.Latitude) + ABS(p.Longitude)) ASC";
 
     echo $query;
+
+    $jsonObjs = array();
+    $jsonObj;
+
+    $result = $conn->query($query);
+    while ($row = $result->fetch_assoc())
+    {
+        $jsonObj->id = $row['ID'];
+        $jsonObj->name = $row['Name'];   
+        $jsonObj->description = $row['Description'];
+        $jsonObj->latitude = $row['Latitude'];
+        $jsonObj->longitude = $row['Longitude'];
+        $jsonObj->avaliation = $row['Avaliation'];
+        $jsonObj->filter = $row['Filter']
+
+        array_push($jsonObjs, $jsonObj);
+    }
+
+    return $jsonObjs;
 }
 
 
