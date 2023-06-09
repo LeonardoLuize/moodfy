@@ -26,24 +26,7 @@ function SearchButton() {
   );
 }
 
-export function Searchinput({setData}) {
-  const [search, setSearch] = useState("")
-
-  useEffect(() => {
-    if(search == "") return
-
-    axios({
-      method: 'get',
-      url: 'http://localhost:5435',
-      params: {
-        query: search,
-        tags: undefined
-      }
-    }).then(data => {
-      console.log("teste")
-      setData(data)
-    })
-  }, [search])
+export function Searchinput({search, setSearch, data, setData}) {
 
   function handleSearch(e){
     e.preventDefault();

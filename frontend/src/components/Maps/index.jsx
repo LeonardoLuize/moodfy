@@ -3,7 +3,7 @@ import "./map.css";
 import { LocationPin } from "./LocationPin";
 import { MapContainer, TileLayer } from "react-leaflet";
 
-export function MapDisplay() {
+export function MapDisplay({data}) {
   const position = [-25.4528, -49.2508];
 
   return (
@@ -13,7 +13,9 @@ export function MapDisplay() {
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
           url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
         />
-        <LocationPin position={position}/>
+        {data?.map(local => (
+          <LocationPin local={local} position={[parseFloat(local.latitude), parseFloat(local.longitude)]}/>
+        ))}
       </MapContainer>
     </div>
   );

@@ -22,7 +22,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-export function Popup() {
+export function Popup({local}) {
   const [isOpen, setIsOpen] = useState(false);
 
   function onClose() {
@@ -51,7 +51,7 @@ export function Popup() {
           width="100%"
           gap={10}
         >
-          <Avatar />
+          <Avatar src={local.photo} />
           <Box
             display="flex"
             flexDir="column"
@@ -59,7 +59,7 @@ export function Popup() {
             alignItems="flex-start"
           >
             <Text fontSize={18} fontWeight="bold" m={0} fontFamily="heading">
-              Porks
+              {local.name}
             </Text>
 
             <Box display="flex" alignItems="center" gap={3}>
@@ -102,13 +102,13 @@ export function Popup() {
                 overflow="hidden"
                 mt={7}
               >
-                <Image w="full" src="https://picsum.photos/300/250" />
+                <Image w="full" src={local.photo} />
               </Box>
             </AlertDialogHeader>
             <AlertDialogCloseButton />
 
             <AlertDialogBody>
-              <Heading mb={5}>Porks</Heading>
+              <Heading mb={5}>{local.name}</Heading>
 
               <Box display="flex" alignItems="center" gap={3}>
                 <Icon as={MapPin} fontSize={25} color="gray.500" />
@@ -143,12 +143,7 @@ export function Popup() {
                   w="400px"
                   m={0}
                 >
-                  Is simply dummy text of the printing and typesetting industry.
-                  Lorem Ipsum has been the industry's standard dummy text ever
-                  since the 1500s, when an unknown printer took a galley of type
-                  and scrambled it to make a type specimen book. It has survived
-                  not only five centuries, but also the leap into electronic
-                  typesetting, remaining essentially unchanged.
+                  {local.description}
                 </Text>
               </Box>
 
@@ -167,31 +162,31 @@ export function Popup() {
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={5 > 1 ? "fill" : "regular"}
+                    weight={(local.avaliation / 10) > 1 ? "fill" : "regular"}
                     fontSize={40}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={5 > 2 ? "fill" : "regular"}
+                    weight={(local.avaliation / 10) > 2 ? "fill" : "regular"}
                     fontSize={40}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={5 > 3 ? "fill" : "regular"}
+                    weight={(local.avaliation / 10) > 3 ? "fill" : "regular"}
                     fontSize={40}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={5 > 4 ? "fill" : "regular"}
+                    weight={(local.avaliation / 10) > 4 ? "fill" : "regular"}
                     fontSize={40}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={5 == 5 ? "fill" : "regular"}
+                    weight={(local.avaliation / 10) >= 5 ? "fill" : "regular"}
                     fontSize={40}
                   />
                 </Box>
