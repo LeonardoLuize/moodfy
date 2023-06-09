@@ -20,7 +20,14 @@ import {
 import { Skeleton, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
 import {MapPin} from "@phosphor-icons/react"
 
-export function LocalsCard({data}) {
+export function LocalsCard({local}) {
+
+  /* 
+    local.name
+    local.filters - tags
+    local.address
+  */
+
   return (
     <>
       <Box display="flex" alignItems="center" gap={5} mt={5}>

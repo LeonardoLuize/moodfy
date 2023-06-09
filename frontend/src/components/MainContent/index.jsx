@@ -27,7 +27,7 @@ export function MainContent(){
             <Box w="100%" h="100%" display="grid" gridTemplateColumns="2fr 1.5fr" >
                 <Box display="flex" flexDir="column" p={8}>
                     <Searchinput search={search} setSearch={setSearch} data={data} setData={setData} />
-                    <LocalsCard />  
+                    <LocalsCard local={data} />  
                 </Box>
 
                 <Box display="flex" flexDir="column" p={8}>
