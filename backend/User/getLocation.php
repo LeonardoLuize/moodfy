@@ -1,4 +1,10 @@
 <?php
+/* Handle CORS */
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: X-Requested-With,Authorization,Content-Type');
+header('Access-Control-Max-Age: 86400');
+header('Content-Type: application/json; charset=utf-8');
 
 function filterByCurrentUser($userLat, $userLong)
 {
@@ -14,22 +20,28 @@ function filterByCurrentUser($userLat, $userLong)
 
 function getLocation()
 {
-    $lat = $_POST['lat'];
-    $long = $_POST['long'];
+    $lat = $_GET['lat'];
+    $long = $_GET['long'];
 
     $result = filterByCurrentUser($lat, $long);
 
     if ($result->num_rows > 0) {
-        $places = array();
-        while ($row = $result->fetch_assoc()) {
-            $places[] = $row;
-        }
-        echo json_encode($places);
-    } else {
-        echo "0 results";
-    }
 
-    return $result;
+        $places = array();       
+        while ($row = $result->fetch_assoc()) {
+            $places[] = $row; // Add place to array // TODO: Check if this works
+        }
+
+        echo json_encode($places);
+
+    } else {
+        $response = array(
+            'status' => 'error',
+            'message' => 'No results found'
+        );
+        echo json_encode($response);
+    }
 }
 
+echo getLocation();
 ?>
