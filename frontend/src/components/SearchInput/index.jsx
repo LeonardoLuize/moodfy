@@ -15,6 +15,8 @@ import {
 } from "@chakra-ui/react";
 import { MagnifyingGlass, PlusCircle } from "@phosphor-icons/react";
 import theme from "../../theme";
+import axios from "axios"
+import {useState, useEffect} from "react"
 
 function SearchButton() {
   return (
@@ -24,12 +26,23 @@ function SearchButton() {
   );
 }
 
-export function Searchinput() {
+export function Searchinput({search, setSearch, data, setData}) {
+
+  function handleSearch(e){
+    e.preventDefault();
+    setSearch(e.target.value)
+  }
+
+  const [visible, setVisible] = useState(true);
+  const removeElement = (element) => {
+    setVisible((prev) => !prev);
+  };
+
   return (
     <>
-      <InputGroup>
+      <InputGroup as="form" onSubmit={handleSearch}>
         <Input borderRadius="10px" p={6} placeholder="Busque um lugar" />
-        <InputRightElement mt={1} mr={2} children={<SearchButton />} />
+        <InputRightElement mt={1} mr={2} children={<SearchButton type="submit" />} />
       </InputGroup>
       <Box mt={2} display="flex" flexWrap="wrap" gap={2}>
         <Tag
@@ -40,7 +53,7 @@ export function Searchinput() {
           _hover={{ bg: theme.colors.brand["200"] }}
         >
           <TagLabel>Rock</TagLabel>
-          <TagCloseButton />
+          <TagCloseButton onClick={removeElement}/>
         </Tag>
         <Tag
           size="lg"
@@ -50,7 +63,7 @@ export function Searchinput() {
           _hover={{ bg: theme.colors.brand["200"] }}
         >
           <TagLabel>Indie</TagLabel>
-          <TagCloseButton />
+          <TagCloseButton onClick={removeElement}/>
         </Tag>
         <Tag
           size="lg"
@@ -60,7 +73,7 @@ export function Searchinput() {
           _hover={{ bg: theme.colors.brand["200"] }}
         >
           <TagLabel>Instagramável</TagLabel>
-          <TagCloseButton />
+          <TagCloseButton onClick={removeElement}/>
         </Tag>
         <Menu>
           <MenuButton

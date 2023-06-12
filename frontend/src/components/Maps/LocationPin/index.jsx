@@ -3,7 +3,7 @@ import { Marker } from "react-leaflet";
 import { Popup } from "../PopUp";
 import "./index.css";
 
-export function LocationPin({ position }) {
+export function LocationPin({ local, position }) {
   return (
     <Marker
       icon={
@@ -18,7 +18,7 @@ export function LocationPin({ position }) {
       }
       position={position}
     >
-      <Popup />
+      <Popup local={local} />
     </Marker>
   );
 }
