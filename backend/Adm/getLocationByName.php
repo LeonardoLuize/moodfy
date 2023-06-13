@@ -13,6 +13,16 @@ function getLocationByName($localName, $userLat, $userLong)
 
     $query = "SELECT * FROM Places WHERE Name = %'$localName'% ORDER BY (ABS(Latitude) + ABS(Longitude)) ASC";
     $result = $conn->query($query);
+    
+    $filters = array();
+    $queryForFilters = "SELECT * FROM Filters f INNER JOIN PlaceXFilter pxf ON (pxf.IDFilter = f.ID) " .
+        "WHERE pxf.IDPlace = '" . $row['ID'] . "'";
+    $result2 = $conn->query($queryForFilters);
+    while ($row2 = $result2->fetch_assoc())
+    {
+        array_push($filters, $row2['Filter']);
+    }
+    
     $conn->close();
 
     $response = array(
@@ -22,9 +32,9 @@ function getLocationByName($localName, $userLat, $userLong)
         'latitude' => $result['Latitude'],
         'longitude' => $result['Longitude'],
         'avaliation' => $result['Avaliation'],
-        'filter' => $result['Filter'],
         'photo' => $result['Photo'],
-        'address' => $result['Address']
+        'address' => $result['Address'],
+        'filters' => $filters
     );
 
     return json_encode($response);
