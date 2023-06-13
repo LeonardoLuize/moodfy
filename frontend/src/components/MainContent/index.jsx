@@ -10,6 +10,7 @@ export function MainContent() {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
   const scrollbarStyles = {
     "&::-webkit-scrollbar": {
       width: "4px",
@@ -36,11 +37,8 @@ export function MainContent() {
           },
         })
         .then((res) => {
-          if (!res.data.id) {
-            return;
-          }
-
-          setData(res.data.data);
+            if(res.data && res.data.length > 0)
+                setData(res.data);
         });
     }, 2000);
 
@@ -60,7 +58,7 @@ export function MainContent() {
             setData={setData}
           />
           <Box css={scrollbarStyles} h="70vh" overflow="auto">
-            {data.map((local) => (
+            {data?.map((local) => (
               <LocalsCard local={local} />
             ))}
           </Box>

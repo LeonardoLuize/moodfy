@@ -13,10 +13,14 @@ function decideQuery($userLat, $userLong, $filters, $localName)
         include('getLocationByFilter.php');
         return json_encode(getLocalFilter($localName, $userLat, $userLong));
     }
-    else
-    {
+    else if ($filters != "" && $localName != ""){
         include('getLocation.php');
         return json_encode(getLocation($filters, $localName, $userLat, $userLong));
+    }
+    else
+    {
+        include('../User/getLocation.php');
+        return json_encode(getLocation($userLat, $userLong));
     }
 }
 

@@ -29,7 +29,7 @@ export function LocalsCard({ local }) {
           h="100px"
           overflow="hidden"
         >
-          <Image src="https://picsum.photos/100/100" w="full" />
+          <Image src={local.photo} w="full" h="full"/>
         </Box>
 
         <Box
@@ -66,7 +66,7 @@ export function LocalsCard({ local }) {
             </Box>
           </Box>
 
-          <Box display="flex" justifyContent="flex-start">
+          <Box display="flex" justifyContent="flex-start" gap={3}>
             {local.filters.map((filter) => (
               <Tag
                 fontFamily="Poppins"

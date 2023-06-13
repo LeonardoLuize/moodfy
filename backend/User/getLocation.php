@@ -18,11 +18,8 @@ function filterByCurrentUser($userLat, $userLong)
     return $result;
 }
 
-function getLocation()
+function getLocation($lat, $long)
 {
-    $lat = $_GET['lat'];
-    $long = $_GET['long'];
-
     $result = filterByCurrentUser($lat, $long);
 
     if ($result->num_rows > 0) {
@@ -43,5 +40,4 @@ function getLocation()
     }
 }
 
-echo getLocation();
 ?>
