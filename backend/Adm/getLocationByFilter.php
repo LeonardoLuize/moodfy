@@ -8,12 +8,12 @@ header('Content-Type: application/json; charset=utf-8');
 
 function getLocalFilter($userLat, $userLong)
 {
-    include('../Connection/getConnection.php');
     $conn = getConnection();
     
     $filters = explode(",", $_GET['filters']);
 
-    $query = "SELECT p.ID, COUNT(p.Name) as counter FROM Places p INNER JOIN PlaceXFilter pxf ON (pxf.IDPlace = p.ID) " .
+    $query = "SELECT p.ID, p.Name, p.Description, p.Latitude, p.Longitude, p.Avaliation, p.Address," .
+    "p.Photo, COUNT(p.Name) as counter FROM Places p INNER JOIN PlaceXFilter pxf ON (pxf.IDPlace = p.ID) " .
         "INNER JOIN Filters f ON (pxf.IDFilter = f.ID) WHERE f.Filter IN (";
 
     for ($i = 0; $i < sizeof($filters); $i++)
@@ -23,24 +23,28 @@ function getLocalFilter($userLat, $userLong)
     $query = rtrim($query, ', ') . ") ";
 
     $query .= "GROUP BY p.Name ";
-    $query .= "ORDER BY counter DESC, (ABS(p.Latitude - $userLat) + ABS(p.Longitude - $userLong)) ASC";
-
-    $filters = array();
-    $queryForFilters = "SELECT * FROM Filters f INNER JOIN PlaceXFilter pxf ON (pxf.IDFilter = f.ID) " .
-        "WHERE pxf.IDPlace = '" . $row['ID'] . "'";
-    $result2 = $conn->query($queryForFilters);
-    while ($row2 = $result2->fetch_assoc())
-    {
-        array_push($filters, $row2['Filter']);
-    }
+    $query .= "ORDER BY counter DESC, (ABS(p.Latitude - " . floatval($userLat) . ") + ABS(p.Longitude - " . floatval($userLong) . ")) ASC";
+    
+    $result = $conn->query($query);
+    
+    
+    
+    
     
     $jsonObjs = array();
     
-    $result = $conn->query($query);
-    $conn->close();
 
     while ($row = $result->fetch_assoc())
     {
+        $filters = array();
+        $queryForFilters = "SELECT * FROM Filters f INNER JOIN PlaceXFilter pxf ON (pxf.IDFilter = f.ID) " .
+            "WHERE pxf.IDPlace = '" . $row['ID'] . "'";
+        $result2 = $conn->query($queryForFilters);
+        while ($row2 = $result2->fetch_assoc())
+        {
+            array_push($filters, $row2['Filter']);
+        }
+
         $jsonObj = array(
             'id' => $row['ID'],
             'name' => $row['Name'],

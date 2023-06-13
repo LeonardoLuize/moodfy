@@ -8,7 +8,6 @@ header('Content-Type: application/json; charset=utf-8');
 
 function getLocation($filters, $localName, $userLat, $userLong)
 {
-    include('../Connection/getConnection.php');
     $conn = getConnection();
     
     $filters = explode(",", $_GET['filters']);
@@ -39,8 +38,7 @@ function getLocation($filters, $localName, $userLat, $userLong)
     
     
     $result = $conn->query($query);
-    $conn->close();
-
+    
     $response = array(
         'id' => $result['ID'],
         'name' => $result['Name'],
@@ -52,12 +50,13 @@ function getLocation($filters, $localName, $userLat, $userLong)
         'address' => $result['Address'],
         'filters' => $filters
     );
-
+    
+    $conn->close();
     return json_encode($response);
 }
 
 $filters = explode(",", $_GET['filters']);
 $localName = $_GET['localName'];
-echo getLocation($filters, $localName);
+echo getLocation($filters, $localName, 0, 0);
 
 ?>

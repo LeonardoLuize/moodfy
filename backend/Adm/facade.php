@@ -2,20 +2,20 @@
 
 function decideQuery($userLat, $userLong, $filters, $localName)
 {
-    include('getLocationByFilter.php');
-    include('getLocationByName.php');
-    include('getLocation.php');
-
+    include('../Connection/getConnection.php');
     if ($localName != "")
     {
+        include('getLocationByName.php');
         return getLocationByName($userLat, $userLong, $filters);
     }
     else if ($filters != "")
     {
+        include('getLocationByFilter.php');
         return getLocalFilter($localName, $userLat, $userLong);
     }
     else
     {
+        include('getLocation.php');
         return getLocation($filters, $localName, $userLat, $userLong);
     }
 }

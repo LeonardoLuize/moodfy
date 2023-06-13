@@ -8,7 +8,6 @@ header('Content-Type: application/json; charset=utf-8');
 
 function getLocationByName($localName, $userLat, $userLong)
 {
-    include '../Connection/getConnection.php';
     $conn = getConnection();
 
     $query = "SELECT * FROM Places WHERE Name = %'$localName'% ORDER BY (ABS(Latitude) + ABS(Longitude)) ASC";
@@ -23,8 +22,7 @@ function getLocationByName($localName, $userLat, $userLong)
         array_push($filters, $row2['Filter']);
     }
     
-    $conn->close();
-
+    
     $response = array(
         'id' => $result['ID'],
         'name' => $result['Name'],
@@ -36,11 +34,12 @@ function getLocationByName($localName, $userLat, $userLong)
         'address' => $result['Address'],
         'filters' => $filters
     );
-
+    
+    $conn->close();
     return json_encode($response);
 }
 
-$localName = $_GET['localName'];
-echo updateData($localName);
+$localName = isset($_GET['localName']) ? $_GET['localName'] : "";
+echo getLocationByName($localName, 0, 0);
 
 ?>
