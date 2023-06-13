@@ -38,7 +38,8 @@ function getLocalFilter($userLat, $userLong)
             'longitude' => $row['Longitude'],
             'avaliation' => $row['Avaliation'],
             'filter' => $row['Filter'],
-            'photo' => $row['Photo']
+            'photo' => $row['Photo'],
+            'address' => $row['Address']
         );
 
         array_push($jsonObjs, $jsonObj);

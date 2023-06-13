@@ -13,6 +13,7 @@ $lat = $data['lat'];
 $long = $data['long'];
 $desc = $data['desc'];
 $photo = $data['photo'];
+$address = $data['address'];
 
 session_start();
 
@@ -21,7 +22,7 @@ function insertData($name, $desc, $lat, $long, $photo)
     include '../Connection/getConnection.php';
     $conn = getConnection();
     
-    $query = "INSERT INTO Places (Name, Latitude, Longitude, Description, Photo) VALUES
+    $query = "INSERT INTO Places (Name, Latitude, Longitude, Description, Photo, Address) VALUES
         ('$name', '$lat', '$long', '$desc', '$photo')";
     
     $result = $conn->query($query);
@@ -36,7 +37,8 @@ function insertData($name, $desc, $lat, $long, $photo)
             'lat' => $lat,
             'long' => $long,
             'desc' => $desc,
-            'photo' => $photo
+            'photo' => $photo,
+            'address' => $address
         );
     } else {
         $response = array(
