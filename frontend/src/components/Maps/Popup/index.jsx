@@ -15,7 +15,6 @@ import "./index.css";
 import {
   AlertDialog,
   AlertDialogBody,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,

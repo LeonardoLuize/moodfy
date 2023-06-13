@@ -1,9 +1,18 @@
 import { Icon } from "leaflet";
-import { Marker } from "react-leaflet";
+import { Marker, useMap } from "react-leaflet";
 import { Popup } from "../PopUp";
 import "./index.css";
+import { useEffect } from "react";
 
-export function LocationPin({ local, position }) {
+export function LocationPin({ setMap, map, local, position }) {
+  const mapState = useMap()
+
+  useEffect(() => {
+    if(!map){
+      setMap(mapState)
+    }
+  }, [map])
+
   return (
     <Marker
       icon={

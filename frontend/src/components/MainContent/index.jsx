@@ -11,6 +11,23 @@ export function MainContent() {
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [userLocation, setUserLocation] = useState([]);
+  const [map, setMap] = useState();
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setUserLocation([position.coords.latitude, position.coords.longitude]);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (map) {
+      let location =
+        userLocation.length > 0 ? userLocation : [-25.4528, -49.2508];
+      map.setView(location, 13);
+    }
+  }, [userLocation]);
+
   const scrollbarStyles = {
     "&::-webkit-scrollbar": {
       width: "4px",
@@ -40,7 +57,9 @@ export function MainContent() {
         .then((res) => {
           setIsLoading(false);
           if (res.data && res.data.length > 0) setData(res.data);
-          console.log(res)
+          if (map) {
+            map.setView([-25.4528, -49.2508], 13);
+          }
         });
     }, 500);
 
@@ -49,7 +68,13 @@ export function MainContent() {
 
   return (
     <>
-      <Box w="100%" h="100%" display={["flex", "flex", "grid"]} flexDir="column" gridTemplateColumns="2fr 1.5fr">
+      <Box
+        w="100%"
+        h="100%"
+        display={["flex", "flex", "grid"]}
+        flexDir="column"
+        gridTemplateColumns="2fr 1.5fr"
+      >
         <Box display="flex" flexDir="column" p={8}>
           <Searchinput
             tags={tags}
@@ -59,9 +84,20 @@ export function MainContent() {
             data={data}
             setData={setData}
           />
-          <Box css={scrollbarStyles} h={["100%", "100%", "80vh"]} mt={5} overflow="auto">
+          <Box
+            css={scrollbarStyles}
+            h={["100%", "100%", "80vh"]}
+            mt={5}
+            overflow="auto"
+          >
             {isLoading ? (
-              <Box h="full" w="full" display="flex" alignItems="center" justifyContent="center">
+              <Box
+                h="full"
+                w="full"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
                 <Spinner
                   thickness="6px"
                   speed="0.65s"
@@ -71,13 +107,13 @@ export function MainContent() {
                 ></Spinner>
               </Box>
             ) : (
-                data.map((local) => <LocalsCard local={local} />)
+              data.map((local) => <LocalsCard map={map} local={local} />)
             )}
           </Box>
         </Box>
 
         <Box display="flex" flexDir="column" p={8} h="full">
-          <MapDisplay data={data} />
+          <MapDisplay setMap={setMap} map={map} data={data} />
         </Box>
       </Box>
     </>

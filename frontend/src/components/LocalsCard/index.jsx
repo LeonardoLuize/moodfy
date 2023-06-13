@@ -1,7 +1,14 @@
 import { Icon, Box, Tag, Text, Heading, Image } from "@chakra-ui/react";
 import { MapPin } from "@phosphor-icons/react";
 
-export function LocalsCard({ local }) {
+export function LocalsCard({ map, local }) {
+
+  function SetViewOnClick() {
+    if(!map) return
+
+    map.setView([parseFloat(local.latitude), parseFloat(local.longitude)], 15)
+  }
+
   return (
     <>
       <Box
@@ -12,6 +19,8 @@ export function LocalsCard({ local }) {
         pl={0}
         _hover={{ pl: [0, 0, 5] }}
         transition="all .3s"
+        cursor="pointer"
+        onClick={SetViewOnClick}
       >
         <Box
           display="flex"
