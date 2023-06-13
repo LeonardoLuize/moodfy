@@ -9,7 +9,7 @@ import { api } from "../../lib/axios";
 export function MainContent(){
     const [data, setData] = useState([])
     const [search, setSearch] = useState("")
-    const [tags, setTags] = useState("rock")
+    const [tags, setTags] = useState([])
     const scrollbarStyles = {
         "&::-webkit-scrollbar": {
           width: "4px",
@@ -24,11 +24,7 @@ export function MainContent(){
       };
 
     useEffect(() => {
-        // exemplo de chamada a api
-        // precisa usar a "/Adm/getLocalsByFilter.php" para o search
-        // mas ela ainda não aceita uma string, apenas as tags mesmo
-        // para pegar mais de uma tag tem que concatenar com a virgula "rock,pop"
-            api.get("/Adm/getLocalsByFilter.php", {params: {filters: tags}}).then(res => {
+            api.get("/Adm/getLocalsByFilter.php", {params: {filters: tags.join(",")}}).then(res => {
                 setData(res.data)
                 console.log(res)
             })
@@ -38,7 +34,7 @@ export function MainContent(){
         <>
             <Box w="100%" h="100%" display="grid" gridTemplateColumns="2fr 1.5fr" >
                 <Box display="flex" flexDir="column" p={8}>
-                    <Searchinput search={search} setSearch={setSearch} data={data} setData={setData} />
+                    <Searchinput tags={tags} setTags={setTags} search={search} setSearch={setSearch} data={data} setData={setData} />
                     <Box css={scrollbarStyles} h="70vh" overflow="auto">
                         {data.map(local => (
                             <LocalsCard local={local} />

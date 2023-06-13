@@ -26,17 +26,30 @@ function SearchButton() {
   );
 }
 
-export function Searchinput({search, setSearch, data, setData}) {
-
-  function handleSearch(e){
-    e.preventDefault();
-    setSearch(e.target.value)
-  }
-
+export function Searchinput({search, setSearch, data, setData, tags, setTags}) {
   const [visible, setVisible] = useState(true);
   const removeElement = (element) => {
     setVisible((prev) => !prev);
   };
+
+  function handleSearch(e){
+    e.preventDefault();
+    setSearch(e.target.value)
+  }  
+
+  function handleRemoveTag(tag){
+    let newTags = tags.filter(x => x !== tag)
+    setTags(newTags)
+  }
+
+  function handleSetTags(tag){
+    let hasTag = tags.find(x => x === tag)
+
+    if (hasTag) {
+      return
+    }    
+    setTags([...tags, tag])
+  }
 
   return (
     <>
@@ -45,37 +58,19 @@ export function Searchinput({search, setSearch, data, setData}) {
         <InputRightElement mt={1} mr={2} children={<SearchButton type="submit" />} />
       </InputGroup>
       <Box mt={2} display="flex" flexWrap="wrap" gap={2}>
-        <Tag
+        {tags.map(tag => (
+          <Tag
           size="lg"
           colorScheme="brand"
           borderRadius="full"
           transition="background-color .2s"
           _hover={{ bg: theme.colors.brand["200"] }}
-        >
-          <TagLabel>Rock</TagLabel>
-          <TagCloseButton onClick={removeElement}/>
-        </Tag>
-        <Tag
-          size="lg"
-          colorScheme="brand"
-          borderRadius="full"
-          transition="background-color .2s"
-          _hover={{ bg: theme.colors.brand["200"] }}
-        >
-          <TagLabel>Indie</TagLabel>
-          <TagCloseButton onClick={removeElement}/>
-        </Tag>
-        <Tag
-          size="lg"
-          colorScheme="brand"
-          borderRadius="full"
-          transition="background-color .2s"
-          _hover={{ bg: theme.colors.brand["200"] }}
-        >
-          <TagLabel>Instagramável</TagLabel>
-          <TagCloseButton onClick={removeElement}/>
-        </Tag>
-        <Menu>
+          >
+            <TagLabel>{tag}</TagLabel>
+            <TagCloseButton onClick={() => handleRemoveTag(tag)}/>
+          </Tag>
+        ))}
+        <Menu onChange={(e) => handleSetTags(e.target.value)} >
           <MenuButton
             borderRadius="full"
             as={Button}
