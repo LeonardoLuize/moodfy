@@ -22,7 +22,7 @@ export function LocalsCard({ local }) {
           h="100px"
           overflow="hidden"
         >
-          <Image src={local.photo} w="full" h="full" />
+          <Image src={local.photo} h="full" />
         </Box>
 
         <Box

@@ -2,10 +2,11 @@ import {
   Avatar,
   Box,
   Button,
-  CardBody,
   Heading,
   Icon,
   Image,
+  Link,
+  Tag,
   Text,
 } from "@chakra-ui/react";
 import { Popup as LeafletPopup } from "react-leaflet";
@@ -22,7 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-export function Popup({local}) {
+export function Popup({ local }) {
   const [isOpen, setIsOpen] = useState(false);
 
   function onClose() {
@@ -65,14 +66,7 @@ export function Popup({local}) {
             <Box display="flex" alignItems="center" gap={3}>
               <Icon as={MapPin} fontSize={15} color="gray.500" />
 
-              <Text
-                color="gray.500"
-                gap={2}
-                alignItems="center"
-                fontFamily="body"
-                noOfLines={1}
-                m={0}
-              >
+              <Text color="gray.500" fontFamily="body" noOfLines={1} m={0}>
                 {local.address}
               </Text>
             </Box>
@@ -102,21 +96,36 @@ export function Popup({local}) {
                 overflow="hidden"
                 mt={7}
               >
-                <Image w="full" h="full" src={local.photo} />
+                <Image w="full" src={local.photo} />
               </Box>
             </AlertDialogHeader>
             <AlertDialogCloseButton />
 
             <AlertDialogBody>
-              <Heading fontSize={[20, 20, 25]} mb={5}>{local.name}</Heading>
+              <Heading fontSize={[20, 20, 25]} mb={1}>
+                {local.name}
+              </Heading>
+
+              <Box display="flex" justifyContent="flex-start" gap={3} mb={5}>
+                {local.filters.map((filter) => (
+                  <Tag
+                    fontFamily="Poppins"
+                    fontStyle="normal"
+                    fontWeight="700"
+                    fontSize="12px"
+                    color="gray.500"
+                  >
+                    {filter}
+                  </Tag>
+                ))}
+              </Box>
 
               <Box display="flex" alignItems="center" gap={3}>
                 <Icon as={MapPin} fontSize={[20, 20, 25]} color="gray.500" />
 
-                <Text
+                <Link
+                  href={`https://www.google.com/maps/place/${local.address}`}
                   color="gray.500"
-                  gap={2}
-                  alignItems="center"
                   fontFamily="body"
                   fontWeight="normal"
                   fontSize={[14, 14, 18]}
@@ -124,8 +133,8 @@ export function Popup({local}) {
                   w="400px"
                   m={0}
                 >
-                 {local.address}
-                </Text>
+                  {local.address}
+                </Link>
               </Box>
 
               <Box display="flex" gap={3} mt={5} mb={10}>
@@ -161,31 +170,41 @@ export function Popup({local}) {
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(parseInt(local.avaliation) / 10)  > 1 ? "fill" : "regular"}
+                    weight={
+                      parseInt(local.avaliation) / 10 > 1 ? "fill" : "regular"
+                    }
                     fontSize={[30, 30, 40]}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(parseInt(local.avaliation) / 10) > 2 ? "fill" : "regular"}
+                    weight={
+                      parseInt(local.avaliation) / 10 > 2 ? "fill" : "regular"
+                    }
                     fontSize={[30, 30, 40]}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(parseInt(local.avaliation) / 10) > 3 ? "fill" : "regular"}
+                    weight={
+                      parseInt(local.avaliation) / 10 > 3 ? "fill" : "regular"
+                    }
                     fontSize={[30, 30, 40]}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(parseInt(local.avaliation) / 10) > 4 ? "fill" : "regular"}
+                    weight={
+                      parseInt(local.avaliation) / 10 > 4 ? "fill" : "regular"
+                    }
                     fontSize={[30, 30, 40]}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(parseInt(local.avaliation) / 10) >= 5 ? "fill" : "regular"}
+                    weight={
+                      parseInt(local.avaliation) / 10 >= 5 ? "fill" : "regular"
+                    }
                     fontSize={[30, 30, 40]}
                   />
                 </Box>
