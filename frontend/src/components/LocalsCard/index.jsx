@@ -15,7 +15,7 @@ export function LocalsCard({ local }) {
         display="flex"
         alignItems="center"
         gap={5}
-        mt={10}
+        mt={5}
         pl={0}
         _hover={{ pl: 5 }}
         transition="all .3s"
@@ -73,7 +73,7 @@ export function LocalsCard({ local }) {
                 fontStyle="normal"
                 fontWeight="700"
                 fontSize="12px"
-                color="#C3C3C3"
+                color="gray.500"
               >
                 {filter}
               </Tag>
