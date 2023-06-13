@@ -2,6 +2,10 @@
 
 function decideQuery($userLat, $userLong, $filters, $localName)
 {
+    include('getLocalFilter.php');
+    include('getLocationByName.php');
+    include('getLocation.php');
+    
     if ($localName == "")
     {
         return getLocalFilter($userLat, $userLong, $filters);
