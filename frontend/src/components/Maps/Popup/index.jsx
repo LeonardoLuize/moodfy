@@ -73,7 +73,7 @@ export function Popup({local}) {
                 noOfLines={1}
                 m={0}
               >
-                Av. Sen. Salgado Filho, 3846 - Uberaba, Curitiba - PR, 81570-001
+                {local.address}
               </Text>
             </Box>
           </Box>
@@ -87,7 +87,7 @@ export function Popup({local}) {
         isOpen={isOpen}
         onClose={onClose}
         motionPreset="slideInBottom"
-        size="2xl"
+        size={["sm", "sm", "2xl"]}
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
@@ -102,16 +102,16 @@ export function Popup({local}) {
                 overflow="hidden"
                 mt={7}
               >
-                <Image w="full" src={local.photo} />
+                <Image w="full" h="full" src={local.photo} />
               </Box>
             </AlertDialogHeader>
             <AlertDialogCloseButton />
 
             <AlertDialogBody>
-              <Heading mb={5}>{local.name}</Heading>
+              <Heading fontSize={[20, 20, 25]} mb={5}>{local.name}</Heading>
 
               <Box display="flex" alignItems="center" gap={3}>
-                <Icon as={MapPin} fontSize={25} color="gray.500" />
+                <Icon as={MapPin} fontSize={[20, 20, 25]} color="gray.500" />
 
                 <Text
                   color="gray.500"
@@ -119,13 +119,12 @@ export function Popup({local}) {
                   alignItems="center"
                   fontFamily="body"
                   fontWeight="normal"
-                  fontSize={18}
+                  fontSize={[14, 14, 18]}
                   noOfLines={1}
                   w="400px"
                   m={0}
                 >
-                  Av. Sen. Salgado Filho, 3846 - Uberaba, Curitiba - PR,
-                  81570-001
+                 {local.address}
                 </Text>
               </Box>
 
@@ -138,7 +137,7 @@ export function Popup({local}) {
                   alignItems="center"
                   fontFamily="body"
                   fontWeight="normal"
-                  fontSize={18}
+                  fontSize={[14, 14, 18]}
                   noOfLines={4}
                   w="400px"
                   m={0}
@@ -162,32 +161,32 @@ export function Popup({local}) {
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(local.avaliation / 10) > 1 ? "fill" : "regular"}
-                    fontSize={40}
+                    weight={(parseInt(local.avaliation) / 10)  > 1 ? "fill" : "regular"}
+                    fontSize={[30, 30, 40]}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(local.avaliation / 10) > 2 ? "fill" : "regular"}
-                    fontSize={40}
+                    weight={(parseInt(local.avaliation) / 10) > 2 ? "fill" : "regular"}
+                    fontSize={[30, 30, 40]}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(local.avaliation / 10) > 3 ? "fill" : "regular"}
-                    fontSize={40}
+                    weight={(parseInt(local.avaliation) / 10) > 3 ? "fill" : "regular"}
+                    fontSize={[30, 30, 40]}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(local.avaliation / 10) > 4 ? "fill" : "regular"}
-                    fontSize={40}
+                    weight={(parseInt(local.avaliation) / 10) > 4 ? "fill" : "regular"}
+                    fontSize={[30, 30, 40]}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(local.avaliation / 10) >= 5 ? "fill" : "regular"}
-                    fontSize={40}
+                    weight={(parseInt(local.avaliation) / 10) >= 5 ? "fill" : "regular"}
+                    fontSize={[30, 30, 40]}
                   />
                 </Box>
               </Box>

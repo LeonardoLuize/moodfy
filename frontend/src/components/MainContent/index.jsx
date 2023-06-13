@@ -1,57 +1,85 @@
-import { Box, Img } from "@chakra-ui/react";
-import {MapDisplay} from "../Maps"
+import { Box, Img, Spinner } from "@chakra-ui/react";
+import { MapDisplay } from "../Maps";
 import { Searchinput } from "../SearchInput";
-import {LocalsCard} from "../LocalsCard";
+import { LocalsCard } from "../LocalsCard";
 import { useEffect, useSyncExternalStore } from "react";
-import {useState} from "react"
+import { useState } from "react";
 import { api } from "../../lib/axios";
 
-export function MainContent(){
-    const [data, setData] = useState([])
-    const [search, setSearch] = useState("")
-    const [tags, setTags] = useState("rock")
-    const scrollbarStyles = {
-        "&::-webkit-scrollbar": {
-          width: "4px",
-        },
-        "&::-webkit-scrollbar-track": {
-          width: "6px",
-        },
-        "&::-webkit-scrollbar-thumb": {
-          backgroundColor: "#C3C3C3",
-          borderRadius: "30px",
-        },
-      };
+export function MainContent() {
+  const [data, setData] = useState([]);
+  const [search, setSearch] = useState("");
+  const [tags, setTags] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const scrollbarStyles = {
+    "&::-webkit-scrollbar": {
+      width: "4px",
+    },
+    "&::-webkit-scrollbar-track": {
+      width: "6px",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "#C3C3C3",
+      borderRadius: "30px",
+    },
+  };
 
-    useEffect(() => {
-        // exemplo de chamada a api
-        // precisa usar a "/Adm/getLocalsByFilter.php" para o search
-        // mas ela ainda não aceita uma string, apenas as tags mesmo
-        // para pegar mais de uma tag tem que concatenar com a virgula "rock,pop"
-            api.get("/Adm/getLocalsByFilter.php", {params: {filters: tags}}).then(res => {
-                setData(res.data)
-                console.log(res)
-            })
-    }, [tags])
+  useEffect(() => {
+    setIsLoading(true);
+    const delay = setTimeout(() => {
+      api
+        .get("/Adm/facade.php", {
+          params: {
+            filters:
+              tags.length > 0
+                ? tags.map((tag) => tag.label).join(",")
+                : undefined,
+            localName: search !== "" ? search : undefined,
+          },
+        })
+        .then((res) => {
+          setIsLoading(false);
+          if (res.data && res.data.length > 0) setData(res.data);
+          console.log(res)
+        });
+    }, 500);
 
-    return(
-        <>
-            <Box w="100%" h="100%" display="grid" gridTemplateColumns="2fr 1.5fr" >
-                <Box display="flex" flexDir="column" p={8}>
-                    <Searchinput search={search} setSearch={setSearch} data={data} setData={setData} />
-                    <Box css={scrollbarStyles} h="70vh" overflow="auto">
-                        <LocalsCard local={data} /> 
-                        <LocalsCard local={data} />
-                        <LocalsCard local={data} />
-                        <LocalsCard local={data} />
-                        <LocalsCard local={data} />
-                    </Box>
-                </Box>
+    return () => clearTimeout(delay);
+  }, [tags, search]);
 
-                <Box display="flex" flexDir="column" p={8}>
-                    <MapDisplay data={data} />
-                </Box>
-            </Box>
-        </>
-    );
+  return (
+    <>
+      <Box w="100%" h="100%" display={["flex", "flex", "grid"]} flexDir="column" gridTemplateColumns="2fr 1.5fr">
+        <Box display="flex" flexDir="column" p={8}>
+          <Searchinput
+            tags={tags}
+            setTags={setTags}
+            search={search}
+            setSearch={setSearch}
+            data={data}
+            setData={setData}
+          />
+          <Box css={scrollbarStyles} h={["100%", "100%", "80vh"]} mt={5} overflow="auto">
+            {isLoading ? (
+              <Box h="full" w="full" display="flex" alignItems="center" justifyContent="center">
+                <Spinner
+                  thickness="6px"
+                  speed="0.65s"
+                  emptyColor="gray.100"
+                  color="green.500"
+                  size="xl"
+                ></Spinner>
+              </Box>
+            ) : (
+                data.map((local) => <LocalsCard local={local} />)
+            )}
+          </Box>
+        </Box>
+
+        <Box display="flex" flexDir="column" p={8} h="full">
+          <MapDisplay data={data} />
+        </Box>
+      </Box>
+    </>
+  );
 }

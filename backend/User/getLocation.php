@@ -6,42 +6,45 @@ header('Access-Control-Allow-Headers: X-Requested-With,Authorization,Content-Typ
 header('Access-Control-Max-Age: 86400');
 header('Content-Type: application/json; charset=utf-8');
 
-function filterByCurrentUser($userLat, $userLong)
+function getLocation($userLat, $userLong)
 {
+    include_once("../Connection/getConnection.php");
+
     $conn = getConnection();
 
-    $query = "SELECT TOP 10 * FROM Places ORDER BY ABS(Latitude - $userLat) + ABS(Longitude - $userLong)"; // TODO: Check if this query works
-    // Filtrando os 10 lugares mais próximos do usuário
-    $result = $conn->query($query);
-    $conn->close();
+    $result = $conn->query("SELECT * FROM places ".
+    "ORDER BY (ABS(Latitude - " . floatval($userLat) . ") + ABS(Longitude - " . floatval($userLong) . ")) ASC");
 
-    return $result;
-}
 
-function getLocation()
-{
-    $lat = $_GET['lat'];
-    $long = $_GET['long'];
+    $jsonObjs = array(); 
+    while ($row = $result->fetch_assoc()) {
 
-    $result = filterByCurrentUser($lat, $long);
-
-    if ($result->num_rows > 0) {
-
-        $places = array();       
-        while ($row = $result->fetch_assoc()) {
-            $places[] = $row; // Add place to array // TODO: Check if this works
+        $filters = array();
+        $queryForFilters = "SELECT * FROM Filters f INNER JOIN PlaceXFilter pxf ON (pxf.IDFilter = f.ID) " .
+            "WHERE pxf.IDPlace = '" . $row['ID'] . "'";
+        $result2 = $conn->query($queryForFilters);
+        while ($row2 = $result2->fetch_assoc())
+        {
+            array_push($filters, $row2['Filter']);
         }
-
-        echo json_encode($places);
-
-    } else {
-        $response = array(
-            'status' => 'error',
-            'message' => 'No results found'
+        
+        $jsonObj = array(
+            'id' => $row['ID'],
+            'name' => $row['Name'],
+            'description' => $row['Description'],
+            'latitude' => $row['Latitude'],
+            'longitude' => $row['Longitude'],
+            'avaliation' => $row['Avaliation'],
+            'photo' => $row['Photo'],
+            'address' => $row['Address'],
+            'filters' => $filters
         );
-        echo json_encode($response);
+
+        array_push($jsonObjs, $jsonObj);
     }
+
+    $conn->close();
+    return $jsonObjs;
 }
 
-echo getLocation();
 ?>

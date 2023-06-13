@@ -8,7 +8,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 function getData($id)
 {
-    include '../Connection/getConnection.php';
+    include_once '../Connection/getConnection.php';
     $conn = getConnection();
 
     $query = "SELECT * FROM places WHERE ID = $id";
