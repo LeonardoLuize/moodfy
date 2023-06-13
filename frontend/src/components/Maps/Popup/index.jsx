@@ -161,31 +161,31 @@ export function Popup({local}) {
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(local.avaliation / 10) > 1 ? "fill" : "regular"}
+                    weight={(parseInt(local.avaliation) / 10)  > 1 ? "fill" : "regular"}
                     fontSize={40}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(local.avaliation / 10) > 2 ? "fill" : "regular"}
+                    weight={(parseInt(local.avaliation) / 10) > 2 ? "fill" : "regular"}
                     fontSize={40}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(local.avaliation / 10) > 3 ? "fill" : "regular"}
+                    weight={(parseInt(local.avaliation) / 10) > 3 ? "fill" : "regular"}
                     fontSize={40}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(local.avaliation / 10) > 4 ? "fill" : "regular"}
+                    weight={(parseInt(local.avaliation) / 10) > 4 ? "fill" : "regular"}
                     fontSize={40}
                   />
                   <Icon
                     color="brand.500"
                     as={Star}
-                    weight={(local.avaliation / 10) >= 5 ? "fill" : "regular"}
+                    weight={(parseInt(local.avaliation) / 10) >= 5 ? "fill" : "regular"}
                     fontSize={40}
                   />
                 </Box>

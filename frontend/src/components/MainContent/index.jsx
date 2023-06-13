@@ -40,6 +40,7 @@ export function MainContent() {
         .then((res) => {
           setIsLoading(false);
           if (res.data && res.data.length > 0) setData(res.data);
+          console.log(res)
         });
     }, 2000);
 
