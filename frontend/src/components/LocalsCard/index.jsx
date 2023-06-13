@@ -47,7 +47,7 @@ export function LocalsCard({ map, local }) {
             justifyContent="flex-start"
             gap="5px"
           >
-            <Heading fontSize={[16, 16, 20]}>{local.name}</Heading>
+            <Heading fontSize={[14, 14, 20]}>{local.name}</Heading>
             <Box
               display="flex"
               alignItems="center"
@@ -58,7 +58,7 @@ export function LocalsCard({ map, local }) {
               <Text
                 fontSize={12}
                 noOfLines={1}
-                w="200px"
+                w={["150px", "150px", "200px"]}
                 textDecorationLine="underline"
                 color="gray.500"
               >

@@ -86,7 +86,7 @@ export function MainContent() {
           />
           <Box
             css={scrollbarStyles}
-            h={["100%", "100%", "80vh"]}
+            h={["300px", "300px", "80vh"]}
             mt={5}
             overflow="auto"
           >
@@ -112,7 +112,7 @@ export function MainContent() {
           </Box>
         </Box>
 
-        <Box display="flex" flexDir="column" p={8} h="full">
+        <Box display="flex" flexDir="column" p={8} h={["500px", "500px", "full"]}>
           <MapDisplay setMap={setMap} map={map} data={data} />
         </Box>
       </Box>
