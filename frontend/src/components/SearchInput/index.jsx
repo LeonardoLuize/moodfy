@@ -43,11 +43,11 @@ export function Searchinput({
 
   function handleSearch(e) {
     e.preventDefault();
-    setSearch(e.target.value);
+    setSearch(search);
   }
 
   function handleRemoveTag(tag) {
-    let newTags = tags.filter((x) => x !== tag);
+    let newTags = tags.filter((x) => x.value !== tag.value);
     setTags(newTags);
   }
 
@@ -69,8 +69,6 @@ export function Searchinput({
         };
       });
 
-      console.log(filteredTags);
-
       setAllTags(filteredTags);
     });
   }, [setAllTags]);
@@ -78,11 +76,10 @@ export function Searchinput({
   return (
     <>
       <InputGroup as="form" onSubmit={handleSearch}>
-        <Input borderRadius="10px" p={6} placeholder="Busque um lugar" />
+        <Input value={search} onChange={(e) => setSearch(e.target.value)} borderRadius="10px" p={6} placeholder="Busque um lugar" />
         <InputRightElement
           mt={1}
           mr={2}
-          children={<SearchButton type="submit" />}
         />
       </InputGroup>
       <Box mt={2} display="flex" flexWrap="wrap" gap={2}>
@@ -94,7 +91,7 @@ export function Searchinput({
             transition="background-color .2s"
             _hover={{ bg: theme.colors.brand["200"] }}
           >
-            <TagLabel>{tag}</TagLabel>
+            <TagLabel>{tag.label}</TagLabel>
             <TagCloseButton onClick={() => handleRemoveTag(tag)} />
           </Tag>
         ))}
