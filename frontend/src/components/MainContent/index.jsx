@@ -23,37 +23,16 @@ export function MainContent() {
     },
   };
 
-  /* useEffect(() => {
-    console.log(search);
-    api
-      .get("/Adm/getLocation.php", {
-        params: {
-          filters:
-            tags.length > 0
-              ? tags.map((tag) => tag.label).join(",")
-              : undefined,
-          localName: search !== "" ? search : "",
-        },
-      })
-      .then((res) => {
-        if (!res.data.id) {
-          return;
-        }
-
-        setData(res.data.data);
-      });
-  }, [tags, search]); */
-
   useEffect(() => {
     const delay = setTimeout(() => {
       api
-        .get("/Adm/getLocation.php", {
+        .get("/Adm/facade.php", {
           params: {
             filters:
               tags.length > 0
                 ? tags.map((tag) => tag.label).join(",")
                 : undefined,
-            localName: search !== "" ? search : "",
+            localName: search !== "" ? search : undefined,
           },
         })
         .then((res) => {
