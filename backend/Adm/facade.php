@@ -2,24 +2,24 @@
 
 function decideQuery($userLat, $userLong, $filters, $localName)
 {
-    include('../Connection/getConnection.php');
+    include_once('../Connection/getConnection.php');
     if ($localName != "")
     {
-        include('getLocationByName.php');
+        include_once('getLocationByName.php');
         return json_encode(getLocationByName($userLat, $userLong, $filters));
     }
     else if ($filters != "")
     {
-        include('getLocationByFilter.php');
+        include_once('getLocationByFilter.php');
         return json_encode(getLocalFilter($localName, $userLat, $userLong));
     }
     else if ($filters != "" && $localName != ""){
-        include('getLocation.php');
+        include_once('getLocation.php');
         return json_encode(getLocation($filters, $localName, $userLat, $userLong));
     }
     else
     {
-        include('../User/getLocation.php');
+        include_once('../User/getLocation.php');
         return json_encode(getLocation($userLat, $userLong));
     }
 }
