@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const api = axios.create({
-    baseURL: 'http://localhost:80/moodfy/backend',
+    baseURL: 'http://localhost:80/moody/backend',
   });
