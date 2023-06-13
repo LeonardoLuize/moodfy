@@ -71,7 +71,7 @@ export function MainContent() {
                 ></Spinner>
               </Box>
             ) : (
-              data.map((local) => <LocalsCard local={local} />)
+                data.map((local) => <LocalsCard local={local} />)
             )}
           </Box>
         </Box>

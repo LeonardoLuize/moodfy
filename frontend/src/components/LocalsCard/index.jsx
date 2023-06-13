@@ -1,11 +1,4 @@
-import {
-  Icon,
-  Box,
-  Tag,
-  Text,
-  Heading,
-  Image,
-} from "@chakra-ui/react";
+import { Icon, Box, Tag, Text, Heading, Image } from "@chakra-ui/react";
 import { MapPin } from "@phosphor-icons/react";
 
 export function LocalsCard({ local }) {
@@ -29,7 +22,7 @@ export function LocalsCard({ local }) {
           h="100px"
           overflow="hidden"
         >
-          <Image src={local.photo} w="full" h="full"/>
+          <Image src={local.photo} w="full" h="full" />
         </Box>
 
         <Box
