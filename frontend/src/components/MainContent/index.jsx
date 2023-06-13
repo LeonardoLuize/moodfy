@@ -26,7 +26,6 @@ export function MainContent(){
     useEffect(() => {
             api.get("/Adm/getLocalsByFilter.php", {params: {filters: tags.join(",")}}).then(res => {
                 setData(res.data)
-                console.log(res)
             })
     }, [tags])
 

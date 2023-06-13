@@ -15,8 +15,8 @@ import {
 } from "@chakra-ui/react";
 import { MagnifyingGlass, PlusCircle } from "@phosphor-icons/react";
 import theme from "../../theme";
-import axios from "axios"
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react";
+import { api } from "../../lib/axios";
 
 function SearchButton() {
   return (
@@ -26,51 +26,79 @@ function SearchButton() {
   );
 }
 
-export function Searchinput({search, setSearch, data, setData, tags, setTags}) {
+export function Searchinput({
+  search,
+  setSearch,
+  data,
+  setData,
+  tags,
+  setTags,
+}) {
   const [visible, setVisible] = useState(true);
+  const [allTags, setAllTags] = useState([]);
+  const [inputValue, setInputValue] = useState("");
   const removeElement = (element) => {
     setVisible((prev) => !prev);
   };
 
-  function handleSearch(e){
+  function handleSearch(e) {
     e.preventDefault();
-    setSearch(e.target.value)
-  }  
-
-  function handleRemoveTag(tag){
-    let newTags = tags.filter(x => x !== tag)
-    setTags(newTags)
+    setSearch(e.target.value);
   }
 
-  function handleSetTags(tag){
-    let hasTag = tags.find(x => x === tag)
+  function handleRemoveTag(tag) {
+    let newTags = tags.filter((x) => x !== tag);
+    setTags(newTags);
+  }
+
+  function handleSetTags(tag) {
+    let hasTag = tags.find((x) => x === tag);
 
     if (hasTag) {
-      return
-    }    
-    setTags([...tags, tag])
+      return;
+    }
+    setTags([...tags, tag]);
   }
+
+  useEffect(() => {
+    api.get("/Adm/getAllFilters.php").then((res) => {
+      let filteredTags = res.data.data.map((tag) => {
+        return {
+          label: tag[1],
+          value: tag[0],
+        };
+      });
+
+      console.log(filteredTags);
+
+      setAllTags(filteredTags);
+    });
+  }, [setAllTags]);
 
   return (
     <>
       <InputGroup as="form" onSubmit={handleSearch}>
         <Input borderRadius="10px" p={6} placeholder="Busque um lugar" />
-        <InputRightElement mt={1} mr={2} children={<SearchButton type="submit" />} />
+        <InputRightElement
+          mt={1}
+          mr={2}
+          children={<SearchButton type="submit" />}
+        />
       </InputGroup>
       <Box mt={2} display="flex" flexWrap="wrap" gap={2}>
-        {tags.map(tag => (
+        {tags.map((tag) => (
           <Tag
-          size="lg"
-          colorScheme="brand"
-          borderRadius="full"
-          transition="background-color .2s"
-          _hover={{ bg: theme.colors.brand["200"] }}
+            size="lg"
+            colorScheme="brand"
+            borderRadius="full"
+            transition="background-color .2s"
+            _hover={{ bg: theme.colors.brand["200"] }}
           >
             <TagLabel>{tag}</TagLabel>
-            <TagCloseButton onClick={() => handleRemoveTag(tag)}/>
+            <TagCloseButton onClick={() => handleRemoveTag(tag)} />
           </Tag>
         ))}
-        <Menu onChange={(e) => handleSetTags(e.target.value)} >
+        <Menu onChange={(e) => handleSetTags(e)}>
           <MenuButton
             borderRadius="full"
             as={Button}
@@ -80,10 +108,14 @@ export function Searchinput({search, setSearch, data, setData, tags, setTags}) {
             Adicionar Filtro
           </MenuButton>
           <MenuList p={2}>
-            <Input my={2} />
-            <MenuItem>Rock</MenuItem>
-            <MenuItem>Indie</MenuItem>
-            <MenuItem>Instagramável</MenuItem>
+            <Input my={2} onChange={(e) => setInputValue(e.target.value)} value={inputValue} />
+            {allTags.filter(x => x.label.includes(inputValue)).map((tag) => (
+              !tags.find((x) => x.value === tag.value) && (
+                <MenuItem onClick={() => handleSetTags(tag)}>
+                  {tag.label}
+                </MenuItem>
+              )
+            ))}
           </MenuList>
         </Menu>
       </Box>
