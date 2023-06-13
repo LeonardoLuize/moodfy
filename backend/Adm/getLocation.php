@@ -1,6 +1,12 @@
 <?php
 
-function getLocation($filters, $localName)
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: X-Requested-With,Authorization,Content-Type');
+header('Access-Control-Max-Age: 86400');
+header('Content-Type: application/json; charset=utf-8');
+
+function getLocation($filters, $localName, $userLat, $userLong)
 {
     include('../Connection/getConnection.php');
     $conn = getConnection();
@@ -19,7 +25,7 @@ function getLocation($filters, $localName)
     $query = $query . "AND p.Name = %'$localName'% ";
 
     $query .= "GROUP BY p.Name ";
-    $query .= "ORDER BY counter DESC, (ABS(p.Latitude) + ABS(p.Longitude)) ASC";
+    $query .= "ORDER BY counter DESC, (ABS(p.Latitude - $userLat) + ABS(p.Longitude - $userLong)) ASC";
 
     $filters = array();
     $queryForFilters = "SELECT * FROM Filters f INNER JOIN PlaceXFilter pxf ON (pxf.IDFilter = f.ID) " .

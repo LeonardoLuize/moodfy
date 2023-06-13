@@ -23,7 +23,7 @@ function getLocalFilter($userLat, $userLong)
     $query = rtrim($query, ', ') . ") ";
 
     $query .= "GROUP BY p.Name ";
-    $query .= "ORDER BY counter DESC, (ABS(p.Latitude) + ABS(p.Longitude)) ASC";
+    $query .= "ORDER BY counter DESC, (ABS(p.Latitude - $userLat) + ABS(p.Longitude - $userLong)) ASC";
 
     $filters = array();
     $queryForFilters = "SELECT * FROM Filters f INNER JOIN PlaceXFilter pxf ON (pxf.IDFilter = f.ID) " .
@@ -38,7 +38,7 @@ function getLocalFilter($userLat, $userLong)
     
     $result = $conn->query($query);
     $conn->close();
-    
+
     while ($row = $result->fetch_assoc())
     {
         $jsonObj = array(

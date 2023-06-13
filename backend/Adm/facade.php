@@ -2,7 +2,7 @@
 
 function decideQuery($userLat, $userLong, $filters, $localName)
 {
-    include('getLocalsByFilter.php');
+    include('getLocationByFilter.php');
     include('getLocationByName.php');
     include('getLocation.php');
     
