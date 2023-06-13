@@ -40,11 +40,9 @@ export function MainContent(){
                 <Box display="flex" flexDir="column" p={8}>
                     <Searchinput search={search} setSearch={setSearch} data={data} setData={setData} />
                     <Box css={scrollbarStyles} h="70vh" overflow="auto">
-                        <LocalsCard local={data} /> 
-                        <LocalsCard local={data} />
-                        <LocalsCard local={data} />
-                        <LocalsCard local={data} />
-                        <LocalsCard local={data} />
+                        {data.map(local => (
+                            <LocalsCard local={local} />
+                        ))}
                     </Box>
                 </Box>
 
