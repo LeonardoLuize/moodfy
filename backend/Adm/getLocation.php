@@ -1,6 +1,6 @@
 <?php
 
-function getLocation($filters, $localName)
+function getLocation($filters, $localName, $userLat, $userLong)
 {
     include('../Connection/getConnection.php');
     $conn = getConnection();
@@ -19,7 +19,7 @@ function getLocation($filters, $localName)
     $query = $query . "AND p.Name = %'$localName'% ";
 
     $query .= "GROUP BY p.Name ";
-    $query .= "ORDER BY counter DESC, (ABS(p.Latitude) + ABS(p.Longitude)) ASC";
+    $query .= "ORDER BY counter DESC, (ABS(p.Latitude - $userLat) + ABS(p.Longitude - $userLong)) ASC";
 
     $filters = array();
     $queryForFilters = "SELECT * FROM Filters f INNER JOIN PlaceXFilter pxf ON (pxf.IDFilter = f.ID) " .
