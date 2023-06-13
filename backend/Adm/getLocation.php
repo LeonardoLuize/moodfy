@@ -55,8 +55,4 @@ function getLocation($filters, $localName, $userLat, $userLong)
     return json_encode($response);
 }
 
-$filters = explode(",", $_GET['filters']);
-$localName = $_GET['localName'];
-echo getLocation($filters, $localName, 0, 0);
-
 ?>

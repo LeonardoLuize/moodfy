@@ -62,8 +62,7 @@ function getLocalFilter($userLat, $userLong)
 
     $conn->close();
 
-    return json_encode($jsonObjs);
+    return $jsonObjs;
 }
 
-echo getLocalFilter($userLat, $userLong);
 ?>

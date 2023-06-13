@@ -6,17 +6,17 @@ function decideQuery($userLat, $userLong, $filters, $localName)
     if ($localName != "")
     {
         include('getLocationByName.php');
-        return getLocationByName($userLat, $userLong, $filters);
+        return json_encode(getLocationByName($userLat, $userLong, $filters));
     }
     else if ($filters != "")
     {
         include('getLocationByFilter.php');
-        return getLocalFilter($localName, $userLat, $userLong);
+        return json_encode(getLocalFilter($localName, $userLat, $userLong));
     }
     else
     {
         include('getLocation.php');
-        return getLocation($filters, $localName, $userLat, $userLong);
+        return json_encode(getLocation($filters, $localName, $userLat, $userLong));
     }
 }
 

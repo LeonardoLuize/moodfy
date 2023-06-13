@@ -39,7 +39,4 @@ function getLocationByName($localName, $userLat, $userLong)
     return json_encode($response);
 }
 
-$localName = isset($_GET['localName']) ? $_GET['localName'] : "";
-echo getLocationByName($localName, 0, 0);
-
 ?>
