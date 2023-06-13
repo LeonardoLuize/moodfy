@@ -18,6 +18,16 @@ function getLocation($userLat, $userLong)
 
     $jsonObjs = array(); 
     while ($row = $result->fetch_assoc()) {
+
+        $filters = array();
+        $queryForFilters = "SELECT * FROM Filters f INNER JOIN PlaceXFilter pxf ON (pxf.IDFilter = f.ID) " .
+            "WHERE pxf.IDPlace = '" . $row['ID'] . "'";
+        $result2 = $conn->query($queryForFilters);
+        while ($row2 = $result2->fetch_assoc())
+        {
+            array_push($filters, $row2['Filter']);
+        }
+        
         $jsonObj = array(
             'id' => $row['ID'],
             'name' => $row['Name'],
@@ -27,6 +37,7 @@ function getLocation($userLat, $userLong)
             'avaliation' => $row['Avaliation'],
             'photo' => $row['Photo'],
             'address' => $row['Address'],
+            'filters' => $filters
         );
 
         array_push($jsonObjs, $jsonObj);
