@@ -10,33 +10,39 @@ function getLocationByName($localName, $userLat, $userLong)
 {
     $conn = getConnection();
 
-    $query = "SELECT * FROM Places WHERE Name = %'$localName'% ORDER BY (ABS(Latitude) + ABS(Longitude)) ASC";
+    $query = "SELECT * FROM Places WHERE Name LIKE '%$localName%' " .
+        "ORDER BY (ABS(Latitude - " . floatval($userLat) . ") + ABS(Longitude - " . floatval($userLong) . ")) ASC";
     $result = $conn->query($query);
     
-    $filters = array();
-    $queryForFilters = "SELECT * FROM Filters f INNER JOIN PlaceXFilter pxf ON (pxf.IDFilter = f.ID) " .
-        "WHERE pxf.IDPlace = '" . $row['ID'] . "'";
-    $result2 = $conn->query($queryForFilters);
-    while ($row2 = $result2->fetch_assoc())
-    {
-        array_push($filters, $row2['Filter']);
+    $jsonObjs = array(); 
+    while ($row = $result->fetch_assoc()) {
+
+        $filters = array();
+        $queryForFilters = "SELECT * FROM Filters f INNER JOIN PlaceXFilter pxf ON (pxf.IDFilter = f.ID) " .
+            "WHERE pxf.IDPlace = '" . $row['ID'] . "'";
+        $result2 = $conn->query($queryForFilters);
+        while ($row2 = $result2->fetch_assoc())
+        {
+            array_push($filters, $row2['Filter']);
+        }
+        
+        $jsonObj = array(
+            'id' => $row['ID'],
+            'name' => $row['Name'],
+            'description' => $row['Description'],
+            'latitude' => $row['Latitude'],
+            'longitude' => $row['Longitude'],
+            'avaliation' => $row['Avaliation'],
+            'photo' => $row['Photo'],
+            'address' => $row['Address'],
+            'filters' => $filters
+        );
+
+        array_push($jsonObjs, $jsonObj);
     }
     
-    
-    $response = array(
-        'id' => $result['ID'],
-        'name' => $result['Name'],
-        'description' => $result['Description'],
-        'latitude' => $result['Latitude'],
-        'longitude' => $result['Longitude'],
-        'avaliation' => $result['Avaliation'],
-        'photo' => $result['Photo'],
-        'address' => $result['Address'],
-        'filters' => $filters
-    );
-    
     $conn->close();
-    return json_encode($response);
+    return $jsonObjs;
 }
 
 ?>

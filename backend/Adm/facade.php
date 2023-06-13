@@ -6,12 +6,12 @@ function decideQuery($userLat, $userLong, $filters, $localName)
     if ($localName != "")
     {
         include_once('getLocationByName.php');
-        return json_encode(getLocationByName($userLat, $userLong, $filters));
+        return json_encode(getLocationByName($localName, $userLat, $userLong));
     }
     else if ($filters != "")
     {
         include_once('getLocationByFilter.php');
-        return json_encode(getLocalFilter($localName, $userLat, $userLong));
+        return json_encode(getLocalFilter($userLat, $userLong, $filters));
     }
     else if ($filters != "" && $localName != ""){
         include_once('getLocation.php');
