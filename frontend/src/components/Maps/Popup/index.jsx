@@ -108,6 +108,7 @@ export function Popup({ local }) {
               <Box display="flex" justifyContent="flex-start" gap={3} mb={5}>
                 {local.filters.map((filter) => (
                   <Tag
+                    key={`${local.id}-${filter}`}
                     fontFamily="Poppins"
                     fontStyle="normal"
                     fontWeight="700"

@@ -15,6 +15,7 @@ export function MapDisplay({ data, setMap, map, eventPosition }) {
         />
         {data?.map((local) => (
           <LocationPin
+            key={`pin-${local.id}`}
             setMap={setMap}
             map={map}
             local={local}

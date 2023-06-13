@@ -76,15 +76,19 @@ export function Searchinput({
   return (
     <>
       <InputGroup as="form" onSubmit={handleSearch}>
-        <Input value={search} onChange={(e) => setSearch(e.target.value)} borderRadius="10px" p={6} placeholder="Busque um lugar" />
-        <InputRightElement
-          mt={1}
-          mr={2}
+        <Input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          borderRadius="10px"
+          p={6}
+          placeholder="Busque um lugar"
         />
+        <InputRightElement mt={1} mr={2} />
       </InputGroup>
       <Box mt={2} display="flex" flexWrap="wrap" gap={2}>
         {tags.map((tag) => (
           <Tag
+            key={tag}
             size="lg"
             colorScheme="brand"
             borderRadius="full"
@@ -105,14 +109,21 @@ export function Searchinput({
             Adicionar Filtro
           </MenuButton>
           <MenuList p={2}>
-            <Input my={2} onChange={(e) => setInputValue(e.target.value)} value={inputValue} />
-            {allTags.filter(x => x.label.includes(inputValue)).map((tag) => (
-              !tags.find((x) => x.value === tag.value) && (
-                <MenuItem onClick={() => handleSetTags(tag)}>
-                  {tag.label}
-                </MenuItem>
-              )
-            ))}
+            <Input
+              my={2}
+              onChange={(e) => setInputValue(e.target.value)}
+              value={inputValue}
+            />
+            {allTags
+              .filter((x) => x.label.includes(inputValue))
+              .map(
+                (tag) =>
+                  !tags.find((x) => x.value === tag.value) && (
+                    <MenuItem key={`menu-${tag.label}`} onClick={() => handleSetTags(tag)}>
+                      {tag.label}
+                    </MenuItem>
+                  )
+              )}
           </MenuList>
         </Menu>
       </Box>

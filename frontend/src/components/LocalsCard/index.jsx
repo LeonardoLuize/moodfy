@@ -2,11 +2,10 @@ import { Icon, Box, Tag, Text, Heading, Image } from "@chakra-ui/react";
 import { MapPin } from "@phosphor-icons/react";
 
 export function LocalsCard({ map, local }) {
-
   function SetViewOnClick() {
-    if(!map) return
+    if (!map) return;
 
-    map.setView([parseFloat(local.latitude), parseFloat(local.longitude)], 15)
+    map.setView([parseFloat(local.latitude), parseFloat(local.longitude)], 15);
   }
 
   return (
@@ -37,21 +36,21 @@ export function LocalsCard({ map, local }) {
         <Box
           display="flex"
           flexDir={"column"}
-          alingItems="flex-start"
+          alignItems="flex-start"
           justifyContent="flex-start"
           gap={5}
         >
           <Box
             display="flex"
             flexDir={"column"}
-            alingItems="flex-start"
+            alignItems="flex-start"
             justifyContent="flex-start"
             gap="5px"
           >
             <Heading fontSize={[16, 16, 20]}>{local.name}</Heading>
             <Box
               display="flex"
-              alingItems="center"
+              alignItems="center"
               justifyContent="flex-start"
               gap={3}
             >
@@ -71,6 +70,7 @@ export function LocalsCard({ map, local }) {
           <Box display="flex" justifyContent="flex-start" gap={3}>
             {local.filters.map((filter) => (
               <Tag
+                key={`${local.id}-${filter}`}
                 fontFamily="Poppins"
                 fontStyle="normal"
                 fontWeight="700"

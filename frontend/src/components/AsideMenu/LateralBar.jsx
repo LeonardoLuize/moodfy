@@ -17,7 +17,7 @@ export function LateralBar({ onOpen }) {
     >
       <>
         <Box>
-          <Img alignSelfz="flex-end" src={MoodyLogo} />
+          <Img alignSelf="flex-end" src={MoodyLogo} />
         </Box>
         <Img src={LogoIcon} w={7} h={7} />
       </>
