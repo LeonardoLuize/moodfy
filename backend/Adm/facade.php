@@ -22,6 +22,10 @@ function decideQuery($userLat, $userLong, $filters, $localName)
     }
 }
 
-echo decideQuery($_GET['userLat'], $_GET['userLong'], $_GET['filters'], $_GET['localName']);
+$userLat = $_GET['userLat'] ? $_GET['userLat'] : ""
+$userLong = $_GET['userLong'] ? $_GET['userLong'] : ""
+$filters = $_GET['filters'] ? $_GET['filters'] : ""
+$localName = $_GET['localName'] ? $_GET['localName'] : ""
 
+echo decideQuery($userLat, $userLong, $filters, $localName);
 ?>
