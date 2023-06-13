@@ -1,4 +1,4 @@
-import { Box, Img } from "@chakra-ui/react";
+import { Box, Img, Spinner } from "@chakra-ui/react";
 import { MapDisplay } from "../Maps";
 import { Searchinput } from "../SearchInput";
 import { LocalsCard } from "../LocalsCard";
@@ -10,7 +10,7 @@ export function MainContent() {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   const scrollbarStyles = {
     "&::-webkit-scrollbar": {
       width: "4px",
@@ -25,6 +25,7 @@ export function MainContent() {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const delay = setTimeout(() => {
       api
         .get("/Adm/facade.php", {
@@ -37,8 +38,8 @@ export function MainContent() {
           },
         })
         .then((res) => {
-            if(res.data && res.data.length > 0)
-                setData(res.data);
+          setIsLoading(false);
+          if (res.data && res.data.length > 0) setData(res.data);
         });
     }, 2000);
 
@@ -57,10 +58,20 @@ export function MainContent() {
             data={data}
             setData={setData}
           />
-          <Box css={scrollbarStyles} h="70vh" overflow="auto">
-            {data?.map((local) => (
-              <LocalsCard local={local} />
-            ))}
+          <Box css={scrollbarStyles} h="80vh" mt={5} overflow="auto">
+            {isLoading ? (
+              <Box h="full" w="full" display="flex" alignItems="center" justifyContent="center">
+                <Spinner
+                  thickness="6px"
+                  speed="0.65s"
+                  emptyColor="gray.100"
+                  color="green.500"
+                  size="xl"
+                ></Spinner>
+              </Box>
+            ) : (
+              data.map((local) => <LocalsCard local={local} />)
+            )}
           </Box>
         </Box>
 

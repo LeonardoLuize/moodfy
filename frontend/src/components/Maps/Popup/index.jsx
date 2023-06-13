@@ -73,7 +73,7 @@ export function Popup({local}) {
                 noOfLines={1}
                 m={0}
               >
-                Av. Sen. Salgado Filho, 3846 - Uberaba, Curitiba - PR, 81570-001
+                {local.address}
               </Text>
             </Box>
           </Box>
@@ -124,8 +124,7 @@ export function Popup({local}) {
                   w="400px"
                   m={0}
                 >
-                  Av. Sen. Salgado Filho, 3846 - Uberaba, Curitiba - PR,
-                  81570-001
+                 {local.address}
                 </Text>
               </Box>
 

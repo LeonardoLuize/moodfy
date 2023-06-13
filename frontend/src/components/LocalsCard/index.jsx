@@ -15,7 +15,7 @@ export function LocalsCard({ local }) {
         display="flex"
         alignItems="center"
         gap={5}
-        mt={5}
+        mt={10}
         pl={0}
         _hover={{ pl: 5 }}
         transition="all .3s"
