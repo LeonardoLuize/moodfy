@@ -1,4 +1,4 @@
-CREATE TABLE `moodfy`.`Places` (`ID` INT NOT NULL AUTO_INCREMENT , `Name` VARCHAR(80) NOT NULL , `Latitude` VARCHAR(12) NOT NULL , `Longitude` VARCHAR(12) NOT NULL , `Description` VARCHAR(255) NOT NULL , `Photo` VARCHAR(999) NOT NULL , `Avaliation` INT , PRIMARY KEY (`ID`)) ENGINE = InnoDB;
+CREATE TABLE `moodfy`.`Places` (`ID` INT NOT NULL AUTO_INCREMENT , `Name` VARCHAR(80) NOT NULL , `Latitude` VARCHAR(12) NOT NULL , `Longitude` VARCHAR(12) NOT NULL , `Address` VARCHAR(255) NOT NULL, `Description` VARCHAR(255) NOT NULL , `Photo` VARCHAR(999) NOT NULL , `Avaliation` INT , PRIMARY KEY (`ID`)) ENGINE = InnoDB;
 
 CREATE TABLE `moodfy`.`Filters` (`ID` INT NOT NULL AUTO_INCREMENT , `Filter` VARCHAR(80) NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB;
 
@@ -20,18 +20,54 @@ INSERT INTO `filters` (`ID`, `Filter`) VALUES
 
 
 
-INSERT INTO `places` (`ID`, `Name`, `Latitude`, `Longitude`, `Description`, `Photo`, `Avaliation`) VALUES (NULL, 'TXAPELLA', '-25.446419', '-49.2961458', 'Bar espanhol colorido que serve tapas, além de kabobs, paellas e mais, com opções de bebidas e happy hour.', 'https://img.restaurantguru.com/r87d-exterior-Txapela-Batel.jpg', '42'),
-(NULL, 'Rock Pizza Roll', '-25.4507485', '-49.2648775', 'Os pedidos são feitos diretamente no Caixa e retirados no Balcão\r\nE para evitar aglomeração, solicitamos que se dirija a eles quando já tiver feito sua escolha.\r\nNossas pizzas são individuais de 20cm de diâmetro, cortadas em 4 fatias e feitas para comer usando as mãos.\r\nRock On', 'https://lh3.googleusercontent.com/p/AF1QipM7RcU3vx2akYR_OnNpGAGak0vKp5-OA2sR14_t=w768-h768-n-o-v1', '47'),
-(NULL, 'RJota', '-25.459055', '-49.2607995', 'Bem-vindos ao melhor Rio de Janeiro! ⏰ Sexta, Sábado e Domingo R. Des. Westphalen, 3140 Clique no link e confira nossos próximos eventos. \r\nlinktr.ee/rjotacwb', 'https://www.bandab.com.br/wp-content/uploads/2022/10/rjota-local-evento-festival-flora-960x592.jpg', '41'),
-(NULL, 'Taisho', '-25.4437053', '-49.3197378', 'Restaurante japonês rodízio ou à la carte em ambiente moderno. Considerado um dos melhores de Curitba, com uma decoração asiática trazendo um ambiente família mas romântico ao mesmo tempo', 'https://images.getinapp.com.br/ce02e2dde70a0b627bb0ee3f1d761e15d340bae6.jpg', '47'),
-(NULL, 'Churrascaria Batel Grill', '-25.448901', '-49.3018669', 'Churrascaria grande e moderna para toda a família com adega de vinhos e buffet de pratos quentes/frios.', 'https://media-cdn.tripadvisor.com/media/photo-s/1c/a7/22/5e/fachada.jpg', '46'),
-(NULL, 'Cooldown E\'Sports n\'Burguers', '-25.4415667', '-49.2718017', 'Hambúrguer bar de opções artesanais gourmets e coquetéis chamativos, em espaço estilizado com área externa e videogames.', 'https://cooldown.com.br/site/wp-content/uploads/2017/06/Cooldown-Estrutura-Interna-00029_Edit.png', '45'),
-(NULL, 'Let\'s Eggs', '-25.4324074', '-49.4254647', 'Temos cafés especiais, sucos e até drinks. Aqui no Let\'s Eggs, o café da manhã é o dia inteiro. Pra quem passa com pressa e pra quem chega e sossega. ', 'https://fastly.4sqi.net/img/general/200x200/5043270_MZU_dYOL7ii07D3R1O4PuXtEd1GooCq2l848gx3hX00.jpg', '42'),
-(NULL, 'Pedrão Bar', '-25.4519965', '-49.2433176', 'Drinques, cerveja e petiscos em um bar espaçoso e simples com mesas ao ar livre e música ao vivo.', 'https://i.ytimg.com/vi/zDgGbn7__Pw/maxresdefault.jpg', '27'),
-(NULL, 'Torre Panoramica', '-25.4242345', '-49.2966135', 'A Torre Panorâmica de Curitiba, também conhecida como Torre da Telepar ou Torre das Mercês, é uma torre de telecomunicações localizada no bairro das Mercês na cidade de Curitiba, capital do estado brasileiro do Paraná.', 'https://curitibaspace.com.br/wp-content/uploads/2016/08/Oi-Torre-Panoramica-Curitiba-Space-1.jpg', '46'),
-(NULL, 'Museu Oscar Niemeyer - MON', '-25.5060431', '-49.2947549', 'O Museu Oscar Niemeyer, também conhecido como Museu do Olho, é um museu de arte localizado na cidade de Curitiba, capital do estado do Paraná, no Brasil. ', 'https://www.aen.pr.gov.br/sites/default/arquivos_restritos/files/imagem/2023-03/fachada_mon._foto_lucas_pontes_0.jpg', '42'),
-(NULL, 'Hot Yoga Batel', '-25.4433176', '-49.2904504', 'Nas salas sem aquecimento, a prática é feita em temperatura ambiente e com luz baixa, variando de acordo com o momento e o tipo de aula. Por ter várias modalidades, é apropriada para todos os níveis, desde o iniciante até o avançado. Além disso, não tem restrições, portanto você pode praticar sem medo.', 'https://lirp.cdn-website.com/c073f46e/dms3rep/multi/opt/image+%281%29-6360edde-1920w.jpg', '47'),
-(NULL, 'Impulso Park', '-25.4541278', '-49.2545644', 'Área de lazer com trampolins, piscina de espuma, paredes de escalada e quadras de queimada e basquete.', 'https://lh3.googleusercontent.com/p/AF1QipM-ZOP_XPWrw5uIPa0nuKLbJ1tBTamU5vTN-6XF=s1360-w1360-h1020', '46'),
-(NULL, 'Ginger Bar', '-25.4326515', '-49.2833175', 'O Ginger Bar é o primeiro bar secreto de Curitiba. Para entrar no local, é necessário falar a senha do dia, que só é descoberta ao mandar uma DM nas redes sociais ou seguindo as dicas das postagens no Instagram. Escondidinho nos fundos de um galeria, não tem placa na frente indicando onde fica o local, aguçando ainda mais a curiosidade da clientela. O destaque, claro, são os drinks e coquetéis da casa.', 'https://media-cdn.tripadvisor.com/media/photo-s/19/41/b5/be/ambiente-do-ginger-bistro.jpg', '47'),
-(NULL, 'Tasty Salad Shop', '-25.43642', '-49.424081', 'Comida saudável e saborosa perto de você.', 'https://vejasp.abril.com.br/wp-content/uploads/2021/02/Credito_Nani-Rodrigues.jpg.jpg', '39'),
-(NULL, 'Drive in Burguer', '-25.4755223', '-49.2977298', 'O Drive In Burger possui uma variedade de pratos que atende todo o tipo de fome. São opções de comida para quem quer compartilhar em grupo com os amigos', 'https://media-cdn.tripadvisor.com/media/photo-s/24/e0/7f/b6/fachada-do-drive-in-burger.jpg', '46');
+INSERT INTO `places` (`ID`, `Name`, `Latitude`, `Longitude`, `Description`, `Photo`, `Avaliation`, `Address`) VALUES 
+    (NULL, 'TXAPELLA', '-25.446419', '-49.2961458', 'Bar espanhol colorido que serve tapas, além de kabobs, paellas e mais, com opções de bebidas e happy hour.', 'https://img.restaurantguru.com/r87d-exterior-Txapela-Batel.jpg', '42', 'R. Bpo. Dom José, 2481 - Seminário'),
+    (NULL, 'Rock Pizza Roll', '-25.4507485', '-49.2648775', 'Os pedidos são feitos diretamente no Caixa e retirados no Balcão\r\nE para evitar aglomeração, solicitamos que se dirija a eles quando já tiver feito sua escolha.\r\nNossas pizzas são individuais de 20cm de diâmetro, cortadas em 4 fatias e feitas para comer usando as mãos.\r\nRock On', 'https://lh3.googleusercontent.com/p/AF1QipM7RcU3vx2akYR_OnNpGAGak0vKp5-OA2sR14_t=w768-h768-n-o-v1', '47', 'R. Chile, 1651 - Rebouças'),
+    (NULL, 'RJota', '-25.459055', '-49.2607995', 'Bem-vindos ao melhor Rio de Janeiro! ⏰ Sexta, Sábado e Domingo R. Des. Westphalen, 3140 Clique no link e confira nossos próximos eventos. \r\nlinktr.ee/rjotacwb', 'https://www.bandab.com.br/wp-content/uploads/2022/10/rjota-local-evento-festival-flora-960x592.jpg', '41', 'R. Des. Westphalen, 3140 - Parolin'),
+    (NULL, 'Taisho', '-25.4437053', '-49.3197378', 'Restaurante japonês rodízio ou à la carte em ambiente moderno. Considerado um dos melhores de Curitba, com uma decoração asiática trazendo um ambiente família mas romântico ao mesmo tempo', 'https://images.getinapp.com.br/ce02e2dde70a0b627bb0ee3f1d761e15d340bae6.jpg', '47', 'Av. Iguaçu, 1836 - Rebouças'),
+    (NULL, 'Churrascaria Batel Grill', '-25.448901', '-49.3018669', 'Churrascaria grande e moderna para toda a família com adega de vinhos e buffet de pratos quentes/frios.', 'https://media-cdn.tripadvisor.com/media/photo-s/1c/a7/22/5e/fachada.jpg', '46', 'Av. N. Sra. Aparecida, 78 - Seminário'),
+    (NULL, 'Cooldown E\'Sports n\'Burguers', '-25.4415667', '-49.2718017', 'Hambúrguer bar de opções artesanais gourmets e coquetéis chamativos, em espaço estilizado com área externa e videogames.', 'https://cooldown.com.br/site/wp-content/uploads/2017/06/Cooldown-Estrutura-Interna-00029_Edit.png', '45', 'Av. Silva Jardim, 1145 - Rebouças'),
+    (NULL, 'Let\'s Eggs', '-25.4324074', '-49.4254647', 'Temos cafés especiais, sucos e até drinks. Aqui no Let\'s Eggs, o café da manhã é o dia inteiro. Pra quem passa com pressa e pra quem chega e sossega. ', 'https://fastly.4sqi.net/img/general/200x200/5043270_MZU_dYOL7ii07D3R1O4PuXtEd1GooCq2l848gx3hX00.jpg', '42', 'Alameda Prudente de Moraes, 1211 - Centro'),
+    (NULL, 'Pedrão Bar', '-25.4519965', '-49.2433176', 'Drinques, cerveja e petiscos em um bar espaçoso e simples com mesas ao ar livre e música ao vivo.', 'https://i.ytimg.com/vi/zDgGbn7__Pw/maxresdefault.jpg', '27', 'R. Dr. Salvador de Maio, 55 - Jardim Botânico'),
+    (NULL, 'Torre Panoramica', '-25.4242345', '-49.2966135', 'A Torre Panorâmica de Curitiba, também conhecida como Torre da Telepar ou Torre das Mercês, é uma torre de telecomunicações localizada no bairro das Mercês na cidade de Curitiba, capital do estado brasileiro do Paraná.', 'https://curitibaspace.com.br/wp-content/uploads/2016/08/Oi-Torre-Panoramica-Curitiba-Space-1.jpg', '46', 'Rua Professor Lycio Grein Castro Vellozo, 191 - Mercês'),
+    (NULL, 'Museu Oscar Niemeyer - MON', '-25.5060431', '-49.2947549', 'O Museu Oscar Niemeyer, também conhecido como Museu do Olho, é um museu de arte localizado na cidade de Curitiba, capital do estado do Paraná, no Brasil. ', 'https://www.aen.pr.gov.br/sites/default/arquivos_restritos/files/imagem/2023-03/fachada_mon._foto_lucas_pontes_0.jpg', '42', 'R. Mal. Hermes, 999 - Centro Cívico'),
+    (NULL, 'Hot Yoga Batel', '-25.4433176', '-49.2904504', 'Nas salas sem aquecimento, a prática é feita em temperatura ambiente e com luz baixa, variando de acordo com o momento e o tipo de aula. Por ter várias modalidades, é apropriada para todos os níveis, desde o iniciante até o avançado. Além disso, não tem restrições, portanto você pode praticar sem medo.', 'https://lirp.cdn-website.com/c073f46e/dms3rep/multi/opt/image+%281%29-6360edde-1920w.jpg', '47', 'Av. Rep. Argentina, 616 - Água Verde'),
+    (NULL, 'Impulso Park', '-25.4541278', '-49.2545644', 'Área de lazer com trampolins, piscina de espuma, paredes de escalada e quadras de queimada e basquete.', 'https://lh3.googleusercontent.com/p/AF1QipM-ZOP_XPWrw5uIPa0nuKLbJ1tBTamU5vTN-6XF=s1360-w1360-h1020', '46', 'R. Francisco Nunes, 1467 - Rebouças'),
+    (NULL, 'Ginger Bar', '-25.4326515', '-49.2833175', 'O Ginger Bar é o primeiro bar secreto de Curitiba. Para entrar no local, é necessário falar a senha do dia, que só é descoberta ao mandar uma DM nas redes sociais ou seguindo as dicas das postagens no Instagram. Escondidinho nos fundos de um galeria, não tem placa na frente indicando onde fica o local, aguçando ainda mais a curiosidade da clientela. O destaque, claro, são os drinks e coquetéis da casa.', 'https://media-cdn.tripadvisor.com/media/photo-s/19/41/b5/be/ambiente-do-ginger-bistro.jpg', '47', 'R. Saldanha Marinho, 1220 - Centro'),
+    (NULL, 'Tasty Salad Shop', '-25.43642', '-49.424081', 'Comida saudável e saborosa perto de você.', 'https://vejasp.abril.com.br/wp-content/uploads/2021/02/Credito_Nani-Rodrigues.jpg.jpg', '39', 'Av. Sete de Setembro, 5096 - Batel'),
+    (NULL, 'Drive in Burguer', '-25.4755223', '-49.2977298', 'O Drive In Burger possui uma variedade de pratos que atende todo o tipo de fome. São opções de comida para quem quer compartilhar em grupo com os amigos', 'https://media-cdn.tripadvisor.com/media/photo-s/24/e0/7f/b6/fachada-do-drive-in-burger.jpg', '46', 'Rua Luiz Parigot de Souza, 248 - Portão');
+
+// !ADICIONAR APENAS DEPOIS DE CRIAR
+
+INSERT INTO `placexfilter` (IDPlace, IDFilter) VALUES
+    (1, 5),
+    (2, 1),
+    (2, 9),
+    (3, 9),
+    (3, 2),
+    (3, 8),
+    (4, 2),
+    (5, 2),
+    (5, 8),
+    (6, 4),
+    (6, 3),
+    (6, 2),
+    (7, 6),
+    (7, 7),
+    (8, 9),
+    (9, 5),
+    (9, 8),
+    (10, 5),
+    (10, 2),
+    (11, 2),
+    (11, 8),
+    (11, 6),
+    (12, 8),
+    (12, 6),
+    (13, 2),
+    (13, 5),
+    (13, 9),
+    (14, 7),
+    (14, 6),
+    (15, 2)
+    
