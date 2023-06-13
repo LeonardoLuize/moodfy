@@ -10,7 +10,7 @@ export function LocalsCard({ local }) {
         gap={5}
         mt={5}
         pl={0}
-        _hover={{ pl: 5 }}
+        _hover={{ pl: [0, 0, 5] }}
         transition="all .3s"
       >
         <Box
@@ -39,7 +39,7 @@ export function LocalsCard({ local }) {
             justifyContent="flex-start"
             gap="5px"
           >
-            <Heading fontSize={20}>{local.name}</Heading>
+            <Heading fontSize={[16, 16, 20]}>{local.name}</Heading>
             <Box
               display="flex"
               alingItems="center"

@@ -49,7 +49,7 @@ export function MainContent() {
 
   return (
     <>
-      <Box w="100%" h="100%" display="grid" gridTemplateColumns="2fr 1.5fr">
+      <Box w="100%" h="100%" display={["flex", "flex", "grid"]} flexDir="column" gridTemplateColumns="2fr 1.5fr">
         <Box display="flex" flexDir="column" p={8}>
           <Searchinput
             tags={tags}
@@ -59,7 +59,7 @@ export function MainContent() {
             data={data}
             setData={setData}
           />
-          <Box css={scrollbarStyles} h="80vh" mt={5} overflow="auto">
+          <Box css={scrollbarStyles} h={["100%", "100%", "80vh"]} mt={5} overflow="auto">
             {isLoading ? (
               <Box h="full" w="full" display="flex" alignItems="center" justifyContent="center">
                 <Spinner
@@ -76,7 +76,7 @@ export function MainContent() {
           </Box>
         </Box>
 
-        <Box display="flex" flexDir="column" p={8}>
+        <Box display="flex" flexDir="column" p={8} h="full">
           <MapDisplay data={data} />
         </Box>
       </Box>
