@@ -42,7 +42,7 @@ export function MainContent() {
           if (res.data && res.data.length > 0) setData(res.data);
           console.log(res)
         });
-    }, 2000);
+    }, 500);
 
     return () => clearTimeout(delay);
   }, [tags, search]);
